@@ -1,0 +1,122 @@
+configuration{
+    modi: "run,drun,window";
+    lines: 5;
+    font: "JetBrains mono Nerd Font 14";
+    show-icons: true;
+    icon-theme: "Papirus";
+    /* icon-theme: "Tela circle"; */
+    terminal: "kitty";
+    drun-display-format: "{name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: " 󰵆 Search Apps ";
+    display-run: " 󰆍  Run ";
+    display-window: " 󱂬  Window";
+    sidebar-mode: true;
+}
+
+@theme "tokyo-night"
+
+element-text, element-icon , mode-switcher {
+    background-color: inherit;
+    text-color:       inherit;
+
+}
+
+window {
+    height: 550px;
+    border: 0px;
+    border-color: @fg-col;
+    background-color: @bg-col;
+    border-radius: 15;
+}
+
+mainbox {
+    background-color: @bg-col;
+    children: [ mode-switcher, inputbar, listview ];
+}
+
+inputbar {
+    children: [prompt,entry];
+    background-color: @bg-col;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+prompt {
+    background-color: @blue;
+    padding: 6px;
+    text-color: @bg-col;
+    border-radius: 5px;
+    margin: 00px 0px 15px 20px;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+}
+
+entry {
+    padding: 6px;
+    border: 1px;
+    margin: 00px 0px 0px 10px;
+    text-color: @fg-col;
+    background-color: @bg-col;
+}
+
+listview {
+    border: 0px 0px 0px;
+    padding: 10 10 0;
+    margin: 10 10 0 10;
+    columns: 5;
+    spacing: 15;
+    background-color: @bg-col;
+}
+
+element {
+    padding: 5px;
+    background-color: @bg-col;
+    text-color: @fg-col  ;
+    orientation: vertical;
+    spacing: 10;
+}
+
+element-icon {
+    size: 76px;
+    horizontal-align: 0.5;
+}
+
+
+element-text {
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+    expand: true;
+    font: "Sofia Pro 10";
+    text-color: #39555a  ;
+  }
+
+element selected {
+    background-color:#0e3644 ;
+    text-color: #0ec1a2  ;
+    border-radius: 8px;
+}
+mode-switcher {
+    spacing: 0;
+    margin: 5 10 5 10;
+    padding: 10 50 5 50;
+  }
+
+button {
+    padding: 10px;
+    background-color: @bg-col-light;
+    text-color: @fg-col;
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+}
+
+button selected {
+  background-color:  @green ;
+  text-color: @bg-col;
+  border-radius: 10px;
+}

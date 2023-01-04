@@ -1,0 +1,431 @@
+###########################################################################
+#
+#                       I3-CONFIG
+#        ______________________________________________________
+#             (   https://github.com/sharad777/   )
+#
+###########################################################################
+
+
+
+
+
+set $mod Mod1
+
+
+#gaps
+#smart_gaps on
+gaps inner 4
+gaps outer 4
+
+bindsym $mod+Shift+g gaps inner all set 20
+bindsym $mod+Shift+o gaps outer all set 10
+bindsym $mod+Shift+n gaps inner all set 0, gaps outer all set 0
+
+
+font pango:monospace 10
+#font pango:DejaVu Sans Mono 6
+
+
+
+
+
+###########################################################################
+#
+#                      APPLICATION KEY 
+#
+###########################################################################
+
+
+bindsym $mod+f exec firefox
+bindsym $mod+t exec thunar
+bindsym $mod+Shift+b exec brave
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+i exec urxvt
+#bindsym $mod+space exec alacritty
+bindsym $mod+ctrl+Shift+Return exec st
+bindsym $mod+a exec alacritty
+bindsym $mod+m exec emacs
+bindsym $mod+x exec emacsclient -c -a 'emacs'
+bindsym $mod+i exec emacsclient -c -a 'emacs'
+ 
+
+
+
+
+
+
+###########################################################################
+#
+#                      APPLICATION KEY 
+#
+###########################################################################
+
+
+exec_always --no-startup-id autotiling 
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+bindsym $mod+shift+d exec --no-startup-id dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf      '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
+bindsym $mod+d exec --no-startup-id rofi -show drun -font "Noto Sans 13"
+ 
+#feh sets wallpaper
+exec --no-startup-id feh --bg-scal /home/sharad/wallpaper/taj.jpg &
+
+# Updater 
+#exec --no-startup-id pamac-tra
+# bluetooth
+#exec --no-startup-id blueberry-tray
+# network
+exec --no-startup-id nm-applet
+# num lock activated
+exec_always --no-startup-id numlockx on
+# dropbox
+#exec --no-startup-id dropbox start
+# insync
+#exec --no-startup-id insync start
+# volume
+#exec --no-startup-id pasystray
+#exec --no-startup-id volumeicon
+
+bindsym $mod+ctrl+h bar mode toggle
+
+
+
+
+
+
+ exec --no-startup-id nvim
+bindsym control+$mod+t exec --no-startup-id arcolinux-tweak-tool
+bindsym control+mod1+1 exec --no-startup-id alacritty; focus
+bindsym mod1+F3 exec --no-startup-id xfce4-appfinder
+
+bindsym control+mod1+r exec --no-startup-id rofi-theme-selector
+bindsym $mod+F12 exec --no-startup-id rofi -show drun -font "Noto Sans 13"
+# rofi theme selector
+bindsym control+mod1+s exec --no-startup-id rofi-theme-selector
+
+
+###########################################################################
+#
+#                MOVEMNENT KEY -change focus and position
+#
+###########################################################################
+
+
+set $up k
+set $down j
+set $left h
+set $right l
+
+
+# change focus
+bindsym $mod+k focus up
+bindsym $mod+j focus down
+bindsym $mod+l focus right
+bindsym $mod+h focus left
+# move focused window
+bindsym $mod+Shift+H move left
+bindsym $mod+Shift+L move right
+bindsym $mod+Shift+J move down
+bindsym $mod+Shift+K move up
+
+
+
+
+
+
+
+###########################################################################
+#
+#                        CHANGE WINDOW MODE
+#
+###########################################################################
+
+
+bindsym $mod+q kill
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+
+floating_modifier $mod
+# split in horizontal orientation
+#bindsym $mod+u split h
+# split in vertical orientation
+bindsym $mod+v split v
+
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+# change focus between tiling / floating windows
+#bindsym $mod+space focus mode_toggle
+bindsym Ctrl+space focus mode_toggle
+
+# focus the parent container
+#bindsym $mod+a focus parent
+
+# enter fullscreen mode for the focused container
+#bindsym Shift+j fullscreen toggle
+bindsym $mod+b fullscreen toggle
+bindsym $mod+r mode "resize"
+
+
+# next/previous workspace
+
+bindsym Mod1+shift+m workspace next
+bindsym Mod1+Shift+u workspace prev
+#bindsym $mod+Tab workspace back_and_forth
+
+#navigate workspaces next / previous
+bindsym Mod1+Ctrl+Right workspace next
+bindsym Mod1+Ctrl+Left workspace prev
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+
+
+
+
+
+
+
+###########################################################################
+#
+#                       RELOAD,EXIT,LOGOUT,RESIZE..
+#
+###########################################################################
+
+
+
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# ArcoLinux Logout
+bindsym $mod+Shift+e exec --no-startup-id arcolinux-logout
+
+
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 20 px or 20 ppt
+        bindsym k resize grow height 20 px or 20 ppt
+        bindsym l resize shrink height 20 px or 20 ppt
+        bindsym semicolon resize grow width 20 px or 20 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+#Backup exit
+#Press ctrl+alt+x - check toolbar for next choices
+bindsym control+mod1+X mode "$mode_system"
+
+set $mode_system System (k) lock, (l) logout, (u) suspend, (h) hibernate, (r) reboot, (s) shutdown
+mode "$mode_system" {
+    bindsym k exec --no-startup-id ~/.config/i3/scripts/i3exit.sh lock, mode "default"
+    bindsym l exec --no-startup-id ~/.config/i3/scripts/i3exit.sh logout, mode "default"
+    bindsym u exec --no-startup-id ~/.config/i3/scripts/i3exit.sh suspend, mode "default"
+    bindsym h exec --no-startup-id ~/.config/i3/scripts/i3exit.sh hibernate, mode "default"
+    bindsym r exec --no-startup-id ~/.config/i3/scripts/i3exit.sh reboot, mode "default"
+    bindsym s exec --no-startup-id ~/.config/i3/scripts/i3exit.sh shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+
+
+
+
+###########################################################################
+#
+#                    WORKSPACE
+#
+###########################################################################
+
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+
+
+
+
+
+
+###########################################################################
+#
+#                     WINDOW BORDER 
+#
+###########################################################################
+
+
+
+
+new_window pixel 0
+
+ default_border pixel 2
+
+#client.focused #A0C7FF #A0C7FF #A0C7FF #A0C7FF  #A0C7FF
+#client.focused_inactive #5D79B1 #5D79B1 #5D79B1 #5D79B1
+#client.unfocused #5D79B1 #5D79B1 #5D79B1 #5D79B1
+#client.urgent #5D79B1 #5D79B1 #5D79B1 #5D79B1
+
+  # Window color settings
+    # class                 border  backgr. text    indicator
+    client.focused          #6790EB #6790EB #e5e5e5 #6790EB
+    client.unfocused        #222222 #222222 #aaaaaa #222222
+    client.focused_inactive #222222 #222222 #a9a9a9 #222222
+    client.placeholder      #222222 #222222 #aaaaaa #222222
+    client.urgent           #d42121 #d42121 #f7f7f7 #d42121
+
+    client.background       #ffffff
+
+
+
+
+###########################################################################
+#
+#                      EXTRA KEYBINDS 
+#
+###########################################################################
+
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+
+
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+
+
+
+
+# floating enabled from some programs - find with xprop
+
+for_window [class="Arcolinux-welcome-app.py"] floating enable
+# for_window [class="Arcolinux-tweak-tool.py"] floating enable
+for_window [class="Arcolinux-calamares-tool.py"] floating enable
+for_window [class="Bleachbit"] floating disable
+for_window [class="Blueberry.py"] floating enable
+for_window [class="Brasero"] floating disable
+for_window [class="Galculator"] floating enable
+for_window [class="Gnome-disks"] floating disable
+for_window [class="^Gnome-font-viewer$"] floating enable
+for_window [class="^Gpick$"] floating enable
+for_window [class="Hexchat"] floating disable
+for_window [class="Imagewriter"] floating enable
+for_window [class="Font-manager"] floating enable
+# for_window [class="qt5ct|Lxappearance] floating enable
+for_window [class="Nitrogen"] floating disable
+for_window [class="Pavucontrol"] floating disable
+for_window [class="Peek"] floating enable
+for_window [class="^Skype$"] floating enable
+for_window [class="^Spotify$"] floating disable
+for_window [class="System-config-printer.py"] floating enable
+for_window [class="Unetbootin.elf"] floating enable
+for_window [class="Usb-creator-gtk"] floating enable
+for_window [class="^Vlc$"] floating disable
+for_window [class="Wine"] floating disable
+for_window [class="Xfburn"] floating disable
+for_window [class="Xfce4-appfinder"] floating enable
+for_window [class="Xfce4-settings-manager"] floating disable
+for_window [class="Xfce4-taskmanager"] floating enable
+
+# for_window [instance="gimp"] floating disable
+#for_window [instance="script-fu"] border normal
+for_window [instance="variety"] floating disable
+
+for_window [title="Copying"] floating enable
+for_window [title="Deleting"] floating enable
+for_window [title="Moving"] floating enable
+for_window [title="^Terminator Preferences$"] floating enable
+
+# for_window [window_role="^gimp-toolbox-color-dialog$"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="^Preferences$"] floating enable
+for_window [window_role="setup"] floating enable
+
+################# give focus to applications       
+
+for_window [class="Gnome-terminal"] focus
+for_window [class="Termite"] focus
+for_window [class="Terminator"] focus
+for_window [class="Urxvt"] focus
