@@ -5,9 +5,10 @@
 </div>
 
 <div align="center">
-  <img src="https://img.shields.io/gitlab/license/sharad777/dotfiles?style=for-the-badge">
-  <img src="https://img.shields.io/gitlab/stars/sharad777/dotfiles?style=for-the-badge">
-  <img src="https://img.shields.io/gitlab/forks/sharad777/dotfiles?color=teal&style=for-the-badge">
+  <img src="https://img.shields.io/github/license/paponahmedsharad/dotfiles?style=for-the-badge">
+  <img src="https://img.shields.io/github/stars/paponahmedsharad/dotfiles?style=for-the-badge">
+  <img src="https://img.shields.io/github/issues/paponahmedsharad/dotfiles?color=violet&style=for-the-badge">
+  <img src="https://img.shields.io/github/forks/paponahmedsharad/dotfiles?color=teal&style=for-the-badge">
 </div>
 
 <hr></hr>
@@ -57,7 +58,7 @@ Here are some details about my setup:
 - **WM:** [awesome](https://github.com/awesomeWM/awesome)
 - **Terminal:** [kitty](https://github.com/kovidgoyal/kitty)
 - **Shell:** [fish](https://www.zsh.org/)
-- **Application launcher:** [rofi](https://github.com/DaveDavenport/rofi)
+- **Application launcher:** [dotfiles](https://github.com/DaveDavenport/rofi)
 - **widgets:**[eww](https://github.com/elkowar/eww)
 - **Compositor:** [picom-pijulius-git](https://github.com/pijulius/picom)
 - **Editor:** [neovim](https://neovim.io)
