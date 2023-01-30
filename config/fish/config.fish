@@ -14,6 +14,7 @@ set -l purple 9d7cd8
 set -l cyan 7dcfff
 set -l pink bb9af7
 
+
 # Syntax Highlighting Colors
 set -g fish_color_normal $foreground
 set -g fish_color_command $cyan
@@ -39,7 +40,6 @@ set -g fish_pager_color_description $comment
 
 # Some config
 set -g fish_greeting
-
 # Git config
 set -g __fish_git_prompt_show_informative_status 1
 set -g __fish_git_prompt_showupstream informative
@@ -135,21 +135,11 @@ end
 starship init fish | source
 
 
-
-
-
-
-
-
-
-
-
-
 ##################### Aias ####################
 # [ -f "$HOME/.config/fish/aliasrc" ] && source "$HOME/.config/fish/aliasrc"
 #───────────────────────── ALIASRC ─────────────────────────────
 alias cd..="cd .."
-alias cc="clear"
+alias ccc="clear"
 alias l="lsd"
 # alias ls="ls --color=auto"
 alias ls="exa --icons -G"
@@ -191,7 +181,7 @@ alias nc="cd ~/.config/nvim/ && nvim init.lua" #--> nvim config
 alias qc="cd ~/.config/qtile/ && nvim config.py" #--> qtile config
 alias ac="cd ~/.config/awesome/ && nvim rc.lua" #--> awesome config
 alias pppp="nvim /tmp/test.py"
-alias ppp="cd ~/workspace/practice"
+alias ppp="cd ~/workspace/practice/demo"
 alias lserver='browser-sync . -w'
 alias makep="touch index.html style.css main.js && nvim *"
 alias lll="nvim /tmp/test.lua"
@@ -231,14 +221,18 @@ alias mkdir="mkdir -p"
 alias brp="~/.Burp/burp.sh"
 alias dvwa="docker run --rm -it -p 80:80 vulnerables/web-dvwa"
 
-
-
+# -------------- autocomplete --------------
+function fish_user_key_bindings
+    bind \cf forward-word
+    # bind \ef forward-char
+    bind \ef forward-word
+    bind \el forward-bigword
+end
 
 #──────────────────────────TTY-1──────────────────────────#
 if [ (tty) = /dev/tty1 ]
     # pgrep awesome; or startx "$XDG_CONFIG_HOME.xinitrc"
    Hyprland
 end
-
 
 # please.py
