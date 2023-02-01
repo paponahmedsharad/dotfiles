@@ -14,7 +14,11 @@ set prefix=()
 insmod normal
 normal
 
-
+# clone a part of repo
+git clone --depth 1 --filter=blob:none --sparse \
+  https://github.com/paponahmedsharad/dotfiles
+cd dotfiles
+git sparse-checkout set configs/wezterm
 
 ┌──────────────────────────────────────────────────────────────────┐
 │                        Note for Void-linux                       │
@@ -72,4 +76,3 @@ Section "InputClass"
         Driver "libinput"
 	Option "NaturalScrolling" "true"
 EndSection
-

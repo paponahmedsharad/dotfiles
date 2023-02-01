@@ -168,6 +168,8 @@ alias yi="yay -S"
 
 #---------------- vi/location ------------------
 alias v="nvim"
+alias vv="nvim -p *"
+alias vw="nvim -O index.html -c sp style.css"
 alias vi="nvim"
 alias svim="sudo nvim"
 alias vrc="vim ~/.vimrc"
@@ -221,13 +223,13 @@ alias mkdir="mkdir -p"
 alias brp="~/.Burp/burp.sh"
 alias dvwa="docker run --rm -it -p 80:80 vulnerables/web-dvwa"
 
-# -------------- autocomplete --------------
-function fish_user_key_bindings
-    bind \cf forward-word
-    # bind \ef forward-char
-    bind \ef forward-word
-    bind \el forward-bigword
-end
+# -------------- autocomplete/execute --------------
+bind --mode default \e\x20 forward-bigword execute
+bind \ef forward-word
+bind \el forward-bigword
+bind \ej execute
+bind \cf forward-word
+
 
 #──────────────────────────TTY-1──────────────────────────#
 if [ (tty) = /dev/tty1 ]
