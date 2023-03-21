@@ -1,0 +1,23 @@
+#!/bin/sh
+
+start() {
+  if ! pgrep -f $1 ;
+  then
+    $@&
+  fi }
+
+# polybar &
+eww daemon &
+$HOME/.config/conky/Auva/start.sh &
+picom &
+# picom --experimental-backend &
+# /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+# feh --bg-fill ~/.config/awesome/themes/wallpapers/tokyo-night10.png
+feh --bg-fill ~/.config/awesome/themes/wallpapers/wallpaper1.png
+# xfce4-power-manager &
+# start picom --experimental-backends --config $HOME/.config/awesome/assets/configs/picom.conf
+# feh --bg-fill ~/.wallpapers/tokyo.png
+# ukui-window-switch &
+# parcellite &
+# plank &

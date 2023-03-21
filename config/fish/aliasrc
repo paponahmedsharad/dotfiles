@@ -1,0 +1,66 @@
+#───────────────────────── ALIASRC ─────────────────────────────
+alias cd..="cd .."
+alias cc="clear"
+alias l="lsd"
+alias ls="ls --color=auto"
+alias la="ls -a"
+alias ll="ls -la"
+alias rr="rm -rf"
+alias cp="cp -r"
+alias cf="cd ~/.config"
+alias grubup="sudo grub-mkconfig -o /boot/grub/grub.cfg"
+
+# ------------- pacman/program -----------------
+alias ii="pacman -S"
+alias ss="pacman -Ss"
+alias pi="paru -S"
+alias ps="paru -Ss"
+alias kc="kcolorchooser"
+alias up="yes | sudo pacman -Syu"
+alias update="yes | sudo pacman -Syyu"
+alias prm="yes | sudo pacman -Rns"
+alias pacman="sudo pacman --color auto"
+alias ys="yay -Ss"
+alias yi="yay -S"
+
+#---------------- vi/location ------------------
+alias v="nvim"
+alias vi="nvim"
+alias svim="sudo nvim"
+alias vrc="vim ~/.vimrc"
+alias zrc="nvim ~/.zshrc"
+alias brc="nvim ~/.bashrc"
+alias arc="nvim ~/.config/fish/aliasrc"
+alias i3c="nvim ~/.config/i3/config"
+alias pbc="nvim ~/.config/polybar/config"
+alias fc="nvim $HOME/.config/fish/config.fish"
+alias nc="cd ~/.config/nvim/ && nvim init.lua" #--> nvim config
+alias qc="cd ~/.config/qtile/ && nvim config.py" #--> qtile config
+alias ac="cd ~/.config/awesome/ && nvim rc.lua" #--> awesome config
+
+# -------------- git ---------------------
+alias gac="git add . && git commit -m "
+alias gp="git push"
+alias gc="git clone --depth=1"
+
+#--> Colorize the grep command
+alias grep="grep --color=auto"
+alias egrep="egrep --color=auto"
+alias fgrep="fgrep --color=auto"
+
+#-------------- others ----------------
+alias df="df -h" # readable output
+alias free="free -mt" #free space of system
+alias unlock="sudo rm /var/lib/pacman/db.lck" #pacman unlock
+alias rmpacmanlock="sudo rm /var/lib/pacman/db.lck"
+alias userlist="cut -d: -f1 /etc/passwd" #userlist
+alias merge="xrdb -merge ~/.Xresources" #merge new settings
+alias psa="ps auxf" #ps
+alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias sysinfo="inxi -Fxz"
+alias rrr="cd ~/.recon"
+alias fetch="bash ~/.config/fetch | lolcat"
+
+# -------------- application --------------
+alias brp="~/.Burp/burp.sh"
+alias dvwa="docker run --rm -it -p 80:80 vulnerables/web-dvwa"

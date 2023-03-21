@@ -1,0 +1,14 @@
+!/bin/sh
+
+# this is just an example!
+# add your autostart stuffs here
+# xrandr --output DP1 --auto --right-of LVDS1 &
+xrandr -s 1920x1080 # screen size
+# xbacklight -set 100 &
+xmodmap ~/.Xmodmap
+#xrdb merge ~/.Xresources &
+feh --bg-fill ~/.config/chadwm/scripts/chad.png &
+xset r rate 200 50 &
+# run bar script and dwm ( do not remove this )
+bash ~/.config/chadwm/scripts/./bar.sh &
+dwm

@@ -1,0 +1,29 @@
+#!/usr/bin/python
+
+import random
+
+quote_msg = [
+    "See you later, alligator!",
+    "Make each day your masterpiece.",
+    "Believe you can and you’re halfway there.",
+    "It is never too late to be what you might have been.",
+    "Stay foolish to stay sane.",
+    "Stay hungry. Stay foolish.",
+    "Wherever you go, go with all your heart.",
+    "Every moment is a fresh beginning.",
+    "If it matters to you, you’ll find a way.",
+    "Don’t wait, the time will never be just right.",
+    "Simplicity is the ultimate sophistication.",
+    "Worrying is like paying a debt you don’t owe.",
+    "Stay out of trouble.",
+    "You do not find the happy life. You make it.",
+    "Don't forget to come back!",
+    "Smell ya later!",
+    "Never look back!",
+    "Well.... bye.",
+    "Clean your system!",
+    "Choose wisely!",
+]
+
+quote = random.choice(quote_msg)
+print(quote)

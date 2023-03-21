@@ -1,0 +1,20 @@
+;;variables
+(defpoll greeting :interval "10h" "PowerMenu/scripts/quote")
+
+;;widgets
+(defwidget powermenu[]
+  (box :class "main-box" :orientation "v" :space-evenly "false"
+    (label :class "greeting" :text greeting :space-evenly "false")
+    (box :class "main-buttons-box" :orientation "h" :space-evenly "false"
+      (button :class "shutdown" :onclick "shutdown now" "󰐥")
+      (button :class "reboot" :onclick "reboot" "󰜉")
+      (button :class "suspend" :onclick "systemctl suspend" "")
+      (button :class "lock" :onclick "$HOME/.scripts/lock" "󰌾"))))
+
+;;windows
+(defwindow powermenu
+  :windowtype "normal"
+  :wm-ignore true
+  :monitor 0
+  :geometry (geometry :anchor "center" :width "400px" :height "100px")
+  (powermenu))

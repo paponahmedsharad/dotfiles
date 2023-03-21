@@ -1,0 +1,122 @@
+[options]
+#https://github.com/thestinger/termite/blob/master/config
+allow_bold = true
+audible_bell = false
+browser = xdg-open
+clickable_url = true
+cursor_blink = system
+cursor_shape = block
+dynamic_title = true
+filter_unmatched_urls = true
+font = Monospace regular 11
+font = Hack 11
+geometry = 900x650
+highlight = #2f2f2f
+icon_name = terminal
+modify_other_keys = false
+mouse_autohide = true
+scroll_on_output = false
+scroll_on_keystroke = true
+scrollback_lines = 50000
+size_hints = false
+search_wrap = true
+urgent_on_bell = true
+
+[hints]
+#font = Monospace 12
+#foreground = #dcdccc
+#background = #3f3f3f
+#active_foreground = #e68080
+#active_background = #3f3f3f
+#padding = 2
+#border = #3f3f3f
+#border_width = 10
+#roundness = 2.0
+
+############################################################
+#### You can change the color coding to your liking
+#### There is a folder themes in ~/config/termite/themes
+#### Copy/paste the colors from one of the 79+ templates to this one
+#### A backup of the original config termite is present
+############################################################
+#### Use websites to make the terminal your own
+#### https://terminal.sexy
+#### https://critical.ch/xterm/
+############################################################
+
+[colors]
+# ArcoLinux Default Theme
+background = #00003a
+
+# special
+foreground      = #ffffff
+foreground_bold = #ffff44
+cursor          = #ffff44
+
+
+
+
+
+# 16 color space
+
+# Black, Gray, Silver, White
+#color0  = #000000
+#color8  = #545454
+#color7  = #cbd6e2
+#color15 = #f7f9fb
+#
+
+#black
+color0  = #000000
+color8  = #005d6f
+
+# Red
+color1  = #b779ff
+color9  = #4e9a06
+
+# Green
+color2  = #5c4eff
+color10 = #1a5fb4
+
+# Yellow
+color3  = #1a5fb4
+color11 = #8ae234
+
+# Blue
+color4  = #1a5fb4
+color12 = #FFFA00
+
+#mageta
+color5  = #D3BDFF
+color13  = #ffffff
+#cyan 
+color6  = #B779FF
+color14   = #1a5fb4
+
+#white
+color15  = #ffffff
+color7  = #ffffff
+
+## Purple
+#color5  = #bf568b
+color13 = #bf568b
+#
+## Teal
+#color6  = #568bbf
+#color14 = #568bbf
+#
+## Extra colors
+color16 = #fb0c00
+color17 = #000000
+color18 = #223b54
+color19 = #405c79
+color20 = #aabcce
+color21 = #e5ebf1
+
+
+
+
+
+
+
+

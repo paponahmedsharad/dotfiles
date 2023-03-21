@@ -1,0 +1,16 @@
+#!/bin/sh
+
+#--> Pacman
+sudo pacman -S kitty alacritty fish neovim xclip brightnessctl feh rofi ttf-font-awesome git kcolorchooser neofetch htop lsd celluloid zathura zathura-pdf-mupdf lxappearance-gtk3 ttf-iosevka-nerd ttf-jetbrains-mono-nerd wofi acpi awesome-git blueman bluez deno dunst exa bat lazygit neovide wl-clipboard xorg-xinit zsh fzf fisher fd bat
+
+#--> AUR
+yay -S nodejs-browser-sync hyprland-git  grimblast
+chsh -s /usr/bin/fish
+
+#--> Git
+git clone https://gitlab.com/sharad777/dotfiles repo/dotfiles --depth 1
+cp -r repo/dotfiles/config/* ~/.config/
+git clone https://gitlab.com/sharad777/fonts repo/fonts --depth 1
+git clone https://gitlab.com/sharad777/qtile repo/qtile --depth 1
+cp -r repo/qtile/wallpaper ~/.wallpaper
+git clone https://github.com/paponahmedhsarad/nvim ~/.config/nvim

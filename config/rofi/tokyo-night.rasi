@@ -1,0 +1,7 @@
+* {
+  bg-col:        #1a1b26;
+  fg-col:        #abb2bf;
+  green:         #689349;
+  bg-col-light:  #1a1b26;
+  blue:          #5294E2;
+}
