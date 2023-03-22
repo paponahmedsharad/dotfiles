@@ -6,16 +6,17 @@ return {
   -- font = wezterm.font("AestheticIosevka Nerd Font Mono"),
   -- font = wezterm.font("Iosevka Nerd Font Complete Mono ExtraLight"),
   -- font = wezterm.font("Iosevka"),
-  font = wezterm.font("Victor Mono"),
-  fallback_fonts = { "Iosevka Nerd Font Mono" },
+  -- font = wezterm.font("Victor Mono"),
+  font = wezterm.font_with_fallback { 'Victor Mono', 'Iosevka Nerd Font Mono' }, -- first font is the primary font and the rest are fallbacks
+  font_rules = { { italic = true, font = wezterm.font_with_fallback { 'Victor Mono', 'Iosevka Nerd Font Mono' }, }, },
 	warn_about_missing_glyphs = true,
   font_size = 11,
   line_height = 1.4,
-  default_cursor_style = "BlinkingBlock", -- Block, Underline, Beam, SteadyBar, BlinkingBar, Hidden, BlinkingUnderline, SteadyUnderline, BlinkingBlock, SteadyBlock
+  default_cursor_style = "BlinkingBar", -- Block, Underline, Beam, SteadyBar, BlinkingBar, Hidden, BlinkingUnderline, SteadyUnderline, BlinkingBlock, SteadyBlock
   cursor_blink_rate = 500,
   cursor_thickness = 1.0,
-  underline_position = 1.0,
-  underline_thickness = 2.0,
+  underline_position = -5.0,
+  underline_thickness = 1.0,
   enable_wayland = true,
   hide_tab_bar_if_only_one_tab = true,
 	window_padding = { left = 8, right = 2, top = 2, bottom = 0, },
