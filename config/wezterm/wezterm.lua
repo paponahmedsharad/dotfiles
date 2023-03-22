@@ -2,11 +2,7 @@ local wezterm = require("wezterm")
 
 return {
   window_decorations = "RESIZE",
-  -- font = wezterm.font("JetBrains Mono Nerd Font Mono"),
   -- font = wezterm.font("AestheticIosevka Nerd Font Mono"),
-  -- font = wezterm.font("Iosevka Nerd Font Complete Mono ExtraLight"),
-  -- font = wezterm.font("Iosevka"),
-  -- font = wezterm.font("Victor Mono"),
   font = wezterm.font_with_fallback { 'Victor Mono', 'Iosevka Nerd Font Mono' }, -- first font is the primary font and the rest are fallbacks
   font_rules = { { italic = true, font = wezterm.font_with_fallback { 'Victor Mono', 'Iosevka Nerd Font Mono' }, }, },
 	warn_about_missing_glyphs = true,
@@ -24,6 +20,7 @@ return {
 	inactive_pane_hsb = { saturation = 1.0, brightness = 1.0 },
 	window_background_opacity = 1.0,
 	window_close_confirmation = "NeverPrompt",
+	disable_default_key_bindings = true,
 
 	-- Aesthetic Night Colorscheme{{{
 	bold_brightens_ansi_colors = true,
@@ -37,7 +34,7 @@ return {
 		selection_fg = "#061115",
 		selection_bg = "#d9d7d6",
 		scrollbar_thumb = "#d9d7d6",
-		split = "#000a0e",
+		split = "#504d84",
 		ansi = { "#1c252c", "#df5b61", "#78b892", "#de8f78", "#6791c9", "#bc83e3", "#67afc1", "#d9d7d6" },
 		brights = { "#484e5b", "#f16269", "#8cd7aa", "#e9967e", "#79aaeb", "#c488ec", "#7acfe4", "#e5e5e5" },
 		indexed = { [136] = "#d9d7d6" },
@@ -51,6 +48,112 @@ return {
 			inactive_tab_hover = { bg_color = "#131e22", fg_color = "#000a0e" },
 			new_tab = { bg_color = "#131e22", fg_color = "#000a0e" },
 			new_tab_hover = { bg_color = "#6791c9", fg_color = "#000a0e" },
+		},
+	},
+-- }}}
+
+  -- Keybinds {{{
+	keys = {
+		{
+			key = [[\]],
+			mods = "CTRL|ALT",
+      action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
+		},
+
+		{
+			key = [[|]],
+			mods = "CTRL|SHIFT",
+      action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
+		},
+		{
+			key = "q",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action({ CloseCurrentPane = { confirm = false } }),
+		},
+		{
+			key = "h",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action({ ActivatePaneDirection = "Left" }),
+		},
+		{
+			key = "l",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action({ ActivatePaneDirection = "Right" }),
+		},
+		{
+			key = "k",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action({ ActivatePaneDirection = "Up" }),
+		},
+		{
+			key = "j",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action({ ActivatePaneDirection = "Down" }),
+		},
+		{
+			key = "h",
+			mods = "CTRL|SHIFT|ALT",
+			action = wezterm.action({ AdjustPaneSize = { "Left", 1 } }),
+		},
+		{
+			key = "l",
+			mods = "CTRL|SHIFT|ALT",
+			action = wezterm.action({ AdjustPaneSize = { "Right", 1 } }),
+		},
+		{
+			key = "k",
+			mods = "CTRL|SHIFT|ALT",
+			action = wezterm.action({ AdjustPaneSize = { "Up", 1 } }),
+		},
+		{
+			key = "j",
+			mods = "CTRL|SHIFT|ALT",
+			action = wezterm.action({ AdjustPaneSize = { "Down", 1 } }),
+		},
+		-- { -- browser-like bindings for tabbing
+		--   key = "t",
+		--   mods = "CTRL",
+		--   action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }),
+		-- },
+		-- {
+		--   key = "w",
+		--   mods = "CTRL",
+		--   action = wezterm.action({ CloseCurrentTab = { confirm = false } }),
+		-- },
+
+    {
+      key = 'u',
+      mods = 'SHIFT|CTRL',
+      action = wezterm.action.CharSelect {
+        copy_on_select = true,
+        copy_to = 'ClipboardAndPrimarySelection',
+      },
+    },
+
+		{
+			key = "Tab",
+			mods = "CTRL",
+			action = wezterm.action({ ActivateTabRelative = 1 }),
+		},
+		{
+			key = "Tab",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action({ ActivateTabRelative = -1 }),
+		}, -- standard copy/paste bindings
+		{
+			key = "x",
+			mods = "CTRL",
+			action = "ActivateCopyMode",
+		},
+		{
+			key = "v",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action({ PasteFrom = "Clipboard" }),
+		},
+		{
+			key = "c",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action({ CopyTo = "ClipboardAndPrimarySelection" }),
 		},
 	},
 -- }}}
