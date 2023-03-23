@@ -1,11 +1,48 @@
 if status is-interactive
-  # find directory
-  fzf_configure_bindings --directory=\cf --variables=\e\cv
-  # add key bindings to find file with fzf and open it in vim
-  bind \cv 'fzf --preview "bat --color=always --style=numbers --line-range :500 {}" | xargs -r nvim'
-  # bind \ct fzf
+    set -g fish_greeting
+    fzf_configure_bindings --directory=\cf --variables=\e\cv                                               # find directory
+    bind \cv 'fzf --preview "bat --color=always --style=numbers --line-range :500 {}" | xargs -r nvim'     # add key bindings to find file with fzf and open it in vim
 end
 
+
+# Source
+starship init fish | source                                                                                # prompt
+[ -f "$HOME/.config/env.fish" ] && source "$HOME/.config/env.fish" #                                       env variables
+
+
+# Locale
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+
+# Exports
+export VISUAL="nvim"                                                                                       # editor
+export EDITOR="$VISUAL"
+
+
+# Completion
+bind --mode default \e\x20 forward-bigword execute                                                          # alt-space
+bind \ef forward-word                                                                                       # alt-f
+bind \e\; forward-bigword                                                                                   # alt-;
+bind \ej execute                                                                                            # alt-j
+# bind \cf forward-word                                                                                     # ctrl-f
+
+
+# Fetch
+set TERM_EMULATOR (ps -aux | grep (ps -p $fish_pid -o ppid=) | awk 'NR==1{print $11}')                      # get the terminal name
+if test "$TERM_EMULATOR" = "/usr/bin/wezterm-gui"                                                           # if wezterm run  "something"
+    wezterm imgcat ~/.icons/flag1.png                                                                       # png/jpg/gif... insted of neofetch
+end
+
+
+# Make su launch fish
+function su
+   command su --shell=/usr/bin/fish $argv
+end
+
+
+
+# Colors{{{
 # TokyoNight Color Palette
 set -l foreground c0caf5
 set -l selection 33467C
@@ -40,67 +77,90 @@ set -g fish_pager_color_progress $comment
 set -g fish_pager_color_prefix $cyan
 set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
+#}}}
 
+# Git config{{{
+# set -g __fish_git_prompt_show_informative_status 1
+# set -g __fish_git_prompt_showupstream informative
+# set -g __fish_git_prompt_showdirtystate yes
+# set -g __fish_git_prompt_char_stateseparator ' '
+# set -g __fish_git_prompt_char_cleanstate '✔'
+# set -g __fish_git_prompt_char_dirtystate '✚'
+# set -g __fish_git_prompt_char_invalidstate '✖'
+# set -g __fish_git_prompt_char_stagedstate '●'
+# set -g __fish_git_prompt_char_stashstate '⚑'
+# set -g __fish_git_prompt_char_untrackedfiles '?'
+# set -g __fish_git_prompt_char_upstream_ahead ''
+# set -g __fish_git_prompt_char_upstream_behind ''
+# set -g __fish_git_prompt_char_upstream_diverged 'ﱟ'
+# set -g __fish_git_prompt_char_upstream_equal ''
+# set -g __fish_git_prompt_char_upstream_prefix ''''
+#}}}
 
-# Some config
-set -g fish_greeting
-# Git config
-set -g __fish_git_prompt_show_informative_status 1
-set -g __fish_git_prompt_showupstream informative
-set -g __fish_git_prompt_showdirtystate yes
-set -g __fish_git_prompt_char_stateseparator ' '
-set -g __fish_git_prompt_char_cleanstate '✔'
-set -g __fish_git_prompt_char_dirtystate '✚'
-set -g __fish_git_prompt_char_invalidstate '✖'
-set -g __fish_git_prompt_char_stagedstate '●'
-set -g __fish_git_prompt_char_stashstate '⚑'
-set -g __fish_git_prompt_char_untrackedfiles '?'
-set -g __fish_git_prompt_char_upstream_ahead ''
-set -g __fish_git_prompt_char_upstream_behind ''
-set -g __fish_git_prompt_char_upstream_diverged 'ﱟ'
-set -g __fish_git_prompt_char_upstream_equal ''
-set -g __fish_git_prompt_char_upstream_prefix ''''
-
-
-# Directory abbreviations
-# abbr -a -g l 'lsd'
-# abbr -a -g la 'ls -a'
-# abbr -a -g ll 'ls -l'
-# abbr -a -g lal 'ls -al'
-# abbr -a -g d 'dirs'
-# abbr -a -g h 'cd $HOME'
-#
-
+# Abbreviations{{{
 # general
+abbr -a -g l 'lsd'
+abbr -a -g ls 'exa --icons -G'
+abbr -a -g la 'ls -a'
+abbr -a -g ll 'ls -l'
+abbr -a -g lal 'ls -al'
+abbr -a -g tree 'exa -T'
+abbr -a -g d 'dirs'
+abbr -a -g h 'cd $HOME'
+abbr -a -g rr 'rm -vrf'
+abbr -a -g cp 'cp -vr'
+abbr -a -g se 'sudo -e'
+abbr -a -g mkdir 'mkdir -p'
 abbr -a -g test 'Xephyr :5 & sleep 1 ; DISPLAY=:5 awesome'
+abbr -a -g svirt 'sudo systemctl start libvirtd.service'
+abbr -a -g line "find . -name '*.lua' | xargs wc -l"
+
+# vim/location
+abbr -a -g v 'nvim'
+abbr -a -g vw "nvim -O index.html -c sp style.css"
+abbr -a -g fc "nvim $HOME/.config/fish/config.fish"
+abbr -a -g nc "cd ~/.config/nvim/ && nvim init.lua" #--> nvim config
+abbr -a -g wp "cd ~/workspace/practice/"
+abbr -a -g py "nvim /tmp/test.py"
+abbr -a -g ppy "python /tmp/test.py"
+abbr -a -g cf '~/.config/'
+abbr -a -g lserver 'browser-sync . -w -b firefox-developer-edition'
+abbr -a -g makep "touch index.html style.css main.js && nvim index.html"
+abbr -a -g lll "nvim /tmp/test.lua"
+abbr -a -g ttt "nvim /tmp/app.ts"
+abbr -a -g hhh "nvim /tmp/index.html"
+abbr -a -g jjj "nvim /tmp/main.js"
+abbr -a -g www "cd ~/workspace"
+
+# git
+abbr -a -g gac 'git add . && git commit -m'
+abbr -a -g gaa 'git add --all'
+abbr -a -g gclr 'git clone --recurse-submodules'
+abbr -a -g push 'git push'
+abbr -a -g gc 'git clone --depth=1'
+abbr -a -g gu 'git clone --depth=1 https://github.com/'
 
 # pacman
 abbr -a -g pas 'pacman -Slq | fzf | xargs -r sudo pacman -S'
-
-# Locale
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-
-# Exports
-export VISUAL="nvim"
-export EDITOR="$VISUAL"
-
-# Term
-switch "$TERM_EMULATOR"
-case '*kitty*'
-	export TERM='xterm-kitty'
-case '*'
-	export TERM='xterm-256color'
-end
-
+abbr -a -g pacs "pacman -Slq | fzf -m --preview 'cat <(pacman -Si {1}) <(pacman -Fl {1} | awk \"{print \$2}\")' | xargs -ro sudo pacman -S"
+abbr -a -g pacr "pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
+abbr -a -g ii 'sudo pacman -S'
+abbr -a -g ss 'sudo pacman -Ss'
+abbr -a -g update 'yes | sudo pacman -Syyu'
+abbr -a -g prm 'sudo pacman -Rns'
+abbr -a -g pars "paru -Slq | fzf -m --preview 'cat <(paru -Si {1}) <(paru -Fl {1} | awk \"{print \$2}\")' | xargs -ro  paru -S"
+abbr -a -g p "pacman -Q | fzf"
+abbr -a -g pi 'paru -S'
+abbr -a -g ps 'paru -Ss'
+abbr -a -g yi 'yay -S'
+abbr -a -g ys 'yay -Ss'
 
 # User abbreviations
+abbr -a -g grubup "sudo grub-mkconfig -o /boot/grub/grub.cfg"
+abbr -a -g chadwm 'startx ~/.config/chadwm/scripts/run.sh'
 abbr -a -g ytmp3 'youtube-dl --extract-audio --audio-format mp3'				# Convert/Download YT videos as mp3
-abbr -a -g h 'history'																								# Show history
 abbr -a -g upd 'paru -Syu --noconfirm'																								# Update everything
-abbr -a -g fucking 'sudo'																						# Rude way to sudo
 abbr -a -g ar 'echo "awesome.restart()" | awesome-client'							# Reload AwesomeWM
-abbr -a -g shinei 'kill -9'																						# Kill ala DIO
 abbr -a -g kv 'kill -9 (pgrep vlc)'																			# Kill zombie vlc
 abbr -a -g priv 'fish --private'																				# Fish incognito mode
 abbr -a -g sshon 'sudo systemctl start sshd.service'										# Start ssh service
@@ -113,109 +173,12 @@ abbr -a -g ipe 'curl ifconfig.co'																				# Get external IP address
 abbr -a -g ips 'ip link show'																					# Get network interfaces information
 abbr -a -g wloff 'rfkill block wlan'																			# Block wlan, killing wifi connection
 abbr -a -g wlon 'rfkill unblock wlan'																		# Unblock wlan, start wifi connection
-abbr -a -g vw "nvim -O index.html -c sp style.css"
-# abbr -a -g ff 'firefox'																								#
+abbr -a -g grep "grep --color=auto"
+abbr -a -g egrep "egrep --color=auto"
+abbr -a -g fgrep "fgrep --color=auto"
+#}}}
 
-# Source plugins
-# Useful plugins: archlinux bang-bang cd colorman sudope vcs
-if test -d "$HOME/.local/share/omf/pkg/colorman/"
-	source ~/.local/share/omf/pkg/colorman/init.fish
-end
-
-# Make su launch fish
-function su
-   command su --shell=/usr/bin/fish $argv
-end
-
-# Get terminal emulator
-set TERM_EMULATOR (ps -aux | grep (ps -p $fish_pid -o ppid=) | awk 'NR==1{print $11}')
-
-# Neofetch
-switch "$TERM_EMULATOR"
-case '*xterm*'
-	nitch --backend 'kitty'
-        # case '*tmux*' '*login*' '*sshd*' '*konsole*'
-        # 	neofetch --backend 'ascii' --ascii_distro 'arch_small'
-        # case '*'
-        # 	nitch --backend 'w3m' --xoffset 34 --yoffset 34 --gap 0
-end
-
-starship init fish | source
-
-
-##################### Aias ####################
-# [ -f "$HOME/.config/fish/aliasrc" ] && source "$HOME/.config/fish/aliasrc"
-#───────────────────────── ALIASRC ─────────────────────────────
-alias cd..="cd .."
-alias ccc="clear"
-alias l="lsd"
-# alias ls="ls --color=auto"
-alias ls="exa --icons -G"
-alias tree="exa -T"
-alias la="ls -a"
-alias ll="ls -la"
-alias rr="rm -rf"
-alias cp="cp -r"
-alias cf="cd ~/.config"
-alias grubup="sudo grub-mkconfig -o /boot/grub/grub.cfg"
-alias chadwm='startx ~/.config/chadwm/scripts/run.sh'
-alias awe="cd ~/.config/awesome/config"
-alias aw="cd ~/.config/awesome/"
-# ------------- pacman/program -----------------
-alias ii="pacman -S"
-alias ss="pacman -Ss"
-alias pi="paru -S"
-alias ps="paru -Ss"
-alias pars="paru -Slq | fzf -m --preview 'cat <(paru -Si {1}) <(paru -Fl {1} | awk \"{print \$2}\")' | xargs -ro  paru -S"
-alias kc="kcolorchooser"
-alias up="yes | sudo pacman -Syu"
-alias update="yes | sudo pacman -Syyu"
-alias prm="yes | sudo pacman -Rns"
-alias pacman="sudo pacman --color auto"
-alias ys="yay -Ss"
-alias yi="yay -S"
-
-#---------------- vi/location ------------------
-alias v="nvim"
-alias vv="nvim -p *"
-# alias vw="nvim -O index.html -c sp style.css"
-alias vi="vim"
-alias svim="sudo nvim"
-alias vrc="vim ~/.vimrc"
-alias zrc="nvim ~/.zshrc"
-alias brc="nvim ~/.bashrc"
-alias arc="nvim ~/.config/fish/aliasrc"
-alias i3c="nvim ~/.config/i3/config"
-alias pbc="nvim ~/.config/polybar/config"
-alias fc="nvim $HOME/.config/fish/config.fish"
-alias nc="cd ~/.config/nvim/ && nvim init.lua" #--> nvim config
-alias lc="cd ~/.config/lazyy/ && nvim init.lua" #--> nvim config
-alias qc="cd ~/.config/qtile/ && nvim config.py" #--> qtile config
-alias ac="cd ~/.config/awesome/ && nvim rc.lua" #--> awesome config
-alias pppp="nvim /tmp/test.py"
-alias ppp="cd ~/workspace/practice/"
-alias lserver='browser-sync . -w -b firefox-developer-edition'
-alias makep="touch index.html style.css main.js && nvim *"
-alias lll="nvim /tmp/test.lua"
-alias ttt="nvim /tmp/app.ts"
-alias ppy="python /tmp/test.py"
-alias hhh="nvim /tmp/index.html"
-alias jjj="nvim /tmp/main.js"
-alias www="cd ~/workspace"
-alias lsp="cd ~/.config/nvim/lua/lsp/ && nvim init.lua"
-alias line="find . -name '*.lua' | xargs wc -l"
-alias nv="neovide --noidle"
-# -------------- git ---------------------
-alias gac="git add . && git commit -m "
-alias gp="git push"
-alias gc="git clone --depth=1"
-alias gch="git clone --depth=1 https://github.com/"
-
-#--> Colorize the grep command
-alias grep="grep --color=auto"
-alias egrep="egrep --color=auto"
-alias fgrep="fgrep --color=auto"
-
+# Aliasrc{{{
 #-------------- others ----------------
 alias df="df -h" # readable output
 alias free="free -mt" #free space of system
@@ -224,37 +187,21 @@ alias rmpacmanlock="sudo rm /var/lib/pacman/db.lck"
 alias userlist="cut -d: -f1 /etc/passwd" #userlist
 alias merge="xrdb -merge ~/.Xresources" #merge new settings
 alias psa="ps auxf" #ps
-alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
-alias sysinfo="inxi -Fxz"
-alias rrr="cd ~/.recon"
-alias fetch="bash ~/.config/fetch | lolcat"
-alias mkdir="mkdir -p"
-
 # -------------- application --------------
 alias brp="~/.Burp/burp.sh"
 alias dvwa="docker run --rm -it -p 80:80 vulnerables/web-dvwa"
-
-# -------------- autocomplete/execute --------------
-bind --mode default \e\x20 forward-bigword execute
-bind \ef forward-word
-bind \e\; forward-bigword
-bind \ej execute
-# bind \cf forward-word
+#}}}
 
 
 
-#──────────────────────────TTY-1──────────────────────────#
+#────────────────────────── TTY-1 ──────────────────────────
 if [ (tty) = /dev/tty1 ]
     # pgrep awesome; or startx "$XDG_CONFIG_HOME.xinitrc"
    Hyprland
 end
 
-# please.py
 
 # setup NVIM_APPNAME variable
 # set -x NVIM_APPNAME "sharad"
-# set -x NVIM_APPNAME "lazyy"
-# set -x NVIM_APPNAME "sharad"
 # set -x NVIM_APPNAME
-# stdpath('config') "~/.config/sharad"
 
