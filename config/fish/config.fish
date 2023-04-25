@@ -205,3 +205,5 @@ end
 # set -x NVIM_APPNAME "sharad"
 # set -x NVIM_APPNAME
 
+# add ~/.config/emacs/bin to PATH
+set -x PATH $PATH ~/.config/emacs/bin
