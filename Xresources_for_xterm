@@ -1,0 +1,134 @@
+!------------------------------------------------------------------------------
+!                               XTERM CONFIG                                  !
+!------------------------------------------------------------------------------
+xterm*faceName: Iosevka Nerd Font Mono
+xterm*renderFont: true
+xterm*faceSize: 14
+! font size for resize with <ctrl>+/-
+xterm*faceSize1: 12
+xterm*faceSize2: 13
+! VT font menu: Medium
+xterm*faceSize3: 14
+xterm*faceSize4: 15
+xterm*faceSize5: 16
+
+! xterm*vt100*geometry: 100x30
+xterm*loginShell: true
+xterm*saveLines: 50000
+xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
+! xterm*termName: xterm-color
+xterm*termName: xterm-256color
+xterm*eightBitInput: false
+! line-height
+xterm*vt100.scaleHeight: 1.0
+
+xterm*boldMode: true
+xterm*colorBDMode: true
+xterm*colorBD: rgb:ff/ff/ff
+
+! copy/paste and resize font
+xterm*VT100.Translations: #override \
+    Ctrl <Key> minus: smaller-vt-font() \n\
+    Ctrl <Key> plus: larger-vt-font() \n\
+    Ctrl <Key> 0: set-vt-font(d) \n\
+    Ctrl Shift <Key>C:    copy-selection(CLIPBOARD) \n\
+    Ctrl Shift <Key>V: insert-selection(CLIPBOARD)
+
+
+
+! theme-1{{{
+! xterm*background: #1a1b26
+! xterm*foreground: #e6e6e6
+
+! xterm*color0: rgb:3f/3f/3f
+! xterm*color1: rgb:cc/00/00
+! xterm*color2: rgb:4e/9a/06
+! xterm*color3: rgb:c4/a0/00
+! xterm*color4: rgb:34/65/a4
+! xterm*color5: rgb:ad/6a/b8
+! xterm*color6: rgb:06/98/9a
+! xterm*color7: rgb:dc/dc/cc
+! xterm*color8: rgb:54/54/54
+! xterm*color9: rgb:fc/54/54
+! xterm*color10: rgb:8a/e2/34
+! xterm*color11: rgb:fc/e9/4f
+! xterm*color12: rgb:94/bf/f3
+! xterm*color13: rgb:dc/95/e8
+! xterm*color14: rgb:93/e0/e3
+! xterm*color15: rgb:ff/ff/ff
+!-----------------------------------------------------------------------
+
+
+
+/*}}}*/
+
+! theme-2{{{
+! Background:
+#define _background #1a1b26
+#define _color8 #303030
+
+! Color1/foreground: light grey: standard files, cursor
+! Color9: bright pink: soft link e.g. ln -s test1 imaginarytest
+#define _foreground #d0d0d0
+#define _color9 #ff0090
+
+! Color2: dark green: world read/write dir e.g. /tmp
+! Color10: bright green: binaries user can execute /bin
+#define _color2 #66AA11
+#define _color10 #80FF00
+
+! Color3: medium brown: fifo e.g mkfifo fifotest
+! Color11: light brown/sand: block special files e.g ls -l /dev/loop0
+#define _color3 #c47f2c
+#define _color11 #ffba68
+
+! Color4: medium blue: FIXME: unused?
+! Color12: light blue: directory
+#define _color4 #30309b
+#define _color12 #5f5fee
+
+! Color5: dark purple: Not used in ls, in ranger (not sure where it gets it colors from though)
+! Color13: light purple: socket file /var/run/dbus_system_bus_socket
+#define _color5 #7e40a5
+#define _color13 #bb88dd
+
+! Color6: medium magenta: FIXME: unused?
+! Color14: light magenta: symbolic links e.g. ~/Examples /bin/lsmod
+#define _color6 #3579A8
+#define _color14 #4eb4fa
+
+! Color7: medium grey: setuid file e.g. /usr/bin/sudo
+! Color15: light grey: background color for setuid files e.g /usr/bin/sudo
+#define _color7 #9999AA
+! Trying white in case it helps
+#define _color15 #ffffff
+!#define _color15 #d0d0d0
+
+! XTerm specific
+xterm*background: _background
+xterm*foreground: _foreground
+
+! Not really required - XTerm defaults to using the foreground colour
+xterm*cursorColor: _foreground
+
+xterm*color0: _background
+xterm*color1: _foreground
+xterm*color2: _color2
+xterm*color3: _color3
+xterm*color4: _color4
+xterm*color5: _color5
+xterm*color6: _color6
+xterm*color7: _color7
+! 8-15 are considered brighter colours of 1-7
+xterm*color8: _color8
+xterm*color9: _color9
+xterm*color10: _color10
+xterm*color11: _color11
+xterm*color12: _color12
+xterm*color13: _color13
+xterm*color14: _color14
+xterm*color15: _color15
+!-----------------------------------------------------------------------
+/*}}}*/
+
+
