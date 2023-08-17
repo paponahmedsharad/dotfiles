@@ -1,38 +1,66 @@
 ┌──────────────────────────────────────────────────────────────────┐
-│                          General note                            │
+│                          NOTE-FOR-ME                             │
 └──────────────────────────────────────────────────────────────────┘
-# enable tap ------------------------------------------------------
-$ xinput set-prop "$(xinput list --name-only | grep -i touch)" "libinput Tapping Enabled" 1
+# HOW TO SETUP GITHUB SSH KEY FOR LINUX
 
-# login from tty without username --------------------------------
+```
+ssh-keygen -t ed25519 -C xxx@gmail.com
+```
+
+<!-- If you don't want to input your password every time you use your SSH keys, add it to the ssh-agent, which is a background application that saves your keys in memory while you're signed in to the system. -->
+```
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+```
+<!-- copy the pub ssh key and paste your public key into the github ssh Key field -->
+```
+cat ~/.ssh/id_ed25519.pub
+```
+<!-- for test -->
+```
+ssh -T git@github.com
+```
+
+
+
+
+# ENABLE TOUCH-TAP 
+```
+$ xinput set-prop "$(xinput list --name-only | grep -i touch)" "libinput Tapping Enabled" 1
+```
+# LOGIN FROM TTY WITHOUT USERNAME
 # edit "/etc/systemd/system/getty.target.wants/getty@tty1.service" and put those line in service section for auto username
+```
 ExecStart=-/sbin/agetty -n -o <user> %I
 ExecStart=-/sbin/agetty --autologin <user> %I # without password
-
+```
 # if grub breaks
+```
 set prefix=()
 insmod normal
 normal
+```
 
 
 
-┌──────────────────────────────────────────────────────────────────┐
-│                        Note for Void-linux                       │
-└──────────────────────────────────────────────────────────────────┘
-# ALIAS ------------------------------------------------------------
+
+
+# FOR VOID-LINUX
+# alias
 alias ss="xbps-query -Rs"
 alias ii="sudo xbps-install -S"
 alias xv="sudo xbps-remove"
 alias up="xbps-install -Su"
 alias pkglist="xbps-query -l | awk '{ print $2 }' | xargs -n1 xbps-uhelper getpkgname"
-
-# MIRROR ----------------------------------------------------------
+# MIRROR 
 To modify mirror URLs cleanly, copy all the repository configuration files to /etc/xbps.d and change the URLs in each copied repository file.
-$ mkdir -p /etc/xbps.d
-$ cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
-$ sed -i 's|https://alpha.de.repo.voidlinux.org|<repository>|g' /etc/xbps.d/*-repository-*.conf
-
-#repository=https://mirror.clarkson.edu/voidlinux/current
+```
+mkdir -p /etc/xbps.d
+cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
+sed -i 's|https://alpha.de.repo.voidlinux.org|<repository>|g' /etc/xbps.d/*-repository-*.conf
+```
+#FASTED REPO
+repository=https://mirror.clarkson.edu/voidlinux/current
 repository=https://mirrors.tuna.tsinghua.edu.cn/voidlinux/current
 https://alpha.de.repo.voidlinux.org/
 repository=https://mirrors.bfsu.edu.cn/voidlinux/current
@@ -41,12 +69,10 @@ repository=https://repo-us.voidlinux.org/current
 
 
 
-┌──────────────────────────────────────────────────────────────────┐
-│                             X-org stuff                          │
-└──────────────────────────────────────────────────────────────────┘
+# X-ORG STUFF
 # Location: /etc/X11/xorg.conf.d/
-
 ## file_name: 99-synaptics-overrides.conf
+```
 Section  "InputClass"
     Identifier  "touchpad overrides"
     # This makes this snippet apply to any device with the "synaptics" driver
@@ -62,14 +88,16 @@ Section  "InputClass"
     # Enable right mouse button by tapping lower right corner
     Option "RBCornerButton" "3"
     ####################################
+```
 
 EndSection
 
 ## file_name: 30-touchpad.conf
+```
 Section "InputClass"
 	Identifier "SynPS/2 Synaptics TouchPad" #You could also call that "mycooltouchpadrules" it will only matter if the same identifier is used to change configuration again in another xorg snippet.
 	MatchIsTouchpad "on"
         Driver "libinput"
 	Option "NaturalScrolling" "true"
 EndSection
-
+```
