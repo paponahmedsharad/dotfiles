@@ -1,16 +1,20 @@
-"===) OPTIONS{{{
+" OPTIONS{{{
 "--> looks and feels
 "------------------------------------------------------------------------------------------------------
 set encoding=utf8                    " Set utf8 as standard encoding and en_US as the standard language
 set ffs=unix                         " Use Unix as the standard file type
 set mouse=a
-set clipboard=unnamedplus
+set clipboard=unnamed
 set timeoutlen=100
+set ttimeout
+set ttimeoutlen=0
 
 set termguicolors                    " Important for color
+set termwinsize=6x0                  " split terminal size
 syntax enable                        " Enable syntax highlighting
-set foldcolumn=8                    " Add a bit extra margin to the left
+set foldcolumn=8                     " Add a bit extra margin to the left
 set cursorline                       " Hilight current line background
+set noshowmode                       " don't show insert/normal mode
 " => Status line
 set laststatus=0                     " Always show the status line 2, no statusline
 set showtabline=0                    " Don't show tab
@@ -40,7 +44,7 @@ set ignorecase                       " Ignore case when searching
 set smartcase                        " When searching try to be smart about cases
 set hlsearch                         " Highlight search results
 set incsearch                        " Makes search act like search in modern browsers
-set lazyredraw                       " Don't redraw while executing macros (good performance config)
+" set lazyredraw                       " Don't redraw while executing macros (good performance config)
 set magic                            " For regular expressions turn magic on
 set showmatch                        " Show matching brackets when text indicator is over them
 set mat=2                            " How many tenths of a second to blink when matching brackets
@@ -117,17 +121,21 @@ endif
 
 "--> looks and feels
 "==> how cursor will look in insert mode
+"let &t_SI = "\<Esc>[5 q"
+""==> cursor will or not in normal mode
+"let &t_SR = "\<Esc>[5 q"
+"let &t_EI = "\<Esc>[2 q"
+
 let &t_SI = "\<Esc>[5 q"
-"==> cursor will or not in normal mode
-let &t_SR = "\<Esc>[5 q"
-let &t_EI = "\<Esc>[2 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[1 q"
 
 
 "==> folds looks
 function! NeatFoldText()
-    let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+    let line = '⊚ ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
     let lines_count = v:foldend - v:foldstart + 1
-    let lines_count_text = '-->' . printf("%13s", lines_count . ' Lines') . ' ' . printf("%200s",' ')
+    let lines_count_text = '─────────❭❱ (' . printf("%10s", lines_count . ' lines)') . ' ' . printf("%200s",' ')
     let foldchar = matchstr(&fillchars, 'fold:\zs.')
     let foldtextstart = strpart(' ' . repeat(foldchar, v:foldlevel*0) . line, 0, (winwidth(0)*2)/3)
     let foldtextend = lines_count_text . repeat(foldchar, 8)
@@ -146,8 +154,21 @@ set foldtext=NeatFoldText()
 " catch
 " endtry
 
+" Clear cmd line message (TODO)
+" function! s:empty_message(timer)
+"   if mode() ==# 'n'
+"     echon ''
+"   endif
+" endfunction
+
+" augroup cmd_msg_cls
+"     autocmd!
+"     autocmd CmdlineLeave :  call timer_start(1000, funcref('s:empty_message'))
+" augroup END
+
+
 "}}}
-"===) COLORSCHEME{{{
+" COLORSCHEME{{{
 
 set background=dark
 highlight clear
@@ -179,19 +200,16 @@ let g:terminal_color_15 = '#ffffff'
 let g:indentLine_color_term = 242
 let g:indentLine_color_gui = '#747d8d'
 
-hi Cursor         guifg=#1a1b26                   guibg=#ff0000
-hi lCursor        guifg=#1a1b26                   guibg=#ffcc00
+hi Cursor         guifg=#1a1b26    guibg=#ff0000
+hi lCursor        guifg=#1a1b26    guibg=#ffcc00
 "hiCursor         ctermfg=17       ctermbg=220      cterm=NONE        guifg=#1a1b26     guibg=#ffcc00   gui=NONE
 hi Visual         ctermfg=NONE     ctermbg=59       cterm=NONE        guifg=NONE        guibg=#3e4451   gui=NONE
 hi CursorLine     ctermfg=NONE     ctermbg=59       cterm=NONE        guifg=NONE        guibg=#232534   gui=NONE
 hi CursorColumn   ctermfg=NONE     ctermbg=59       cterm=NONE        guifg=NONE        guibg=#353942   gui=NONE
 hi ColorColumn    ctermfg=NONE     ctermbg=59       cterm=NONE        guifg=NONE        guibg=#353942   gui=NONE
-"hi LineNr        ctermfg=242      ctermbg=NONE     cterm=NONE        guifg=#747d8d     guibg=NONE      gui=NONE
 hi LineNr         ctermfg=242      ctermbg=NONE     cterm=NONE        guifg=#1b2e3e     guibg=NONE      gui=NONE
 hi CursorLineNr   ctermfg=Yellow   ctermbg=NONE     cterm=bold        guifg=#ffcc00     guibg=NONE      gui=bold
-"hi ursorLineNr     ctermfg=Yellow   ctermbg=NONE      cterm=bold        guifg=#247c99   guibg=NONE      gui=bold
 hi VertSplit      ctermfg=59       ctermbg=59       cterm=NONE        guifg=#4e535c     guibg=#4e535c   gui=NONE
-"hi MatchParen       ctermfg=39       ctermbg=NONE      cterm=underline   guifg=#10b1fe   guibg=NONE      gui=underline
 hi MatchParen     ctermfg=249                       ctermbg=105       cterm=bold        guibg=#2a3b46   guifg=#b9c0cb   gui=bold
 hi StatusLine     ctermfg=145      ctermbg=59       cterm=bold        guifg=#abb2bf     guibg=#4e535c   gui=bold
 hi StatusLineNC   ctermfg=145      ctermbg=59       cterm=NONE        guifg=#abb2bf     guibg=#4e535c   gui=NONE
@@ -201,7 +219,6 @@ hi PmenuSbar      ctermbg=235      guibg=#22252a
 hi PmenuThumb     ctermbg=242      guibg=#747d8d
 hi IncSearch      ctermfg=17       ctermbg=221      cterm=NONE        guifg=#1a1b26     guibg=#f9c859   gui=NONE
 hi Search         ctermfg=NONE     ctermbg=NONE     cterm=underline   guifg=NONE        guibg=NONE      gui=underline
-"  hi             Directory        ctermfg=221      ctermbg=NONE      cterm=NONE        guifg=#f9c859   guibg=NONE      gui=NONE
 hi Directory      ctermfg=39       ctermbg=NONE     cterm=NONE        guifg=#10b1fe     guibg=NONE      gui=NONE
 hi Folded         ctermfg=60       ctermbg=17       cterm=NONE        guifg=#636d83     guibg=#1a1b26   gui=NONE
 hi Question       ctermfg=31       guifg=#5fb9bc
@@ -429,7 +446,11 @@ hi statuslinenc guibg=#242530 guifg=#242530
 "==> commnet
 hi Comment guifg=#636d83 guibg=#1a1b26 gui=bold
 "==> fold
-hi Folded guibg=#2a2b36 guifg=#9a8b56 gui=bold
+" hi Folded guibg=#2a2b36 guifg=#9a8b56 gui=bold cterm=bold
+" hi Folded guibg=#2a1b26 guifg=#EE5555 gui=bold cterm=bold
+" hi Folded guibg=#2a1b26 guifg=#DE3C3C gui=bold cterm=bold
+hi Folded guibg=NONE guifg=#FF0063 gui=bold cterm=bold
+
 
 
 "==> popup menu
@@ -438,8 +459,17 @@ hi PmenuSel guibg=#3a3b46
 hi PmenuThumb guifg=black guibg=#4a2c26
 hi PmenuSbar guibg=#2b2c26 guifg=#2b2c26
 
+
+
+" show cursor only on current window
+autocmd WinEnter    * set cursorline
+autocmd WinLeave    * set nocursorline
+" change cursorline color depending on mode
+autocmd InsertEnter * hi CursorLine     ctermfg=NONE     ctermbg=59       cterm=NONE        guifg=NONE        guibg=#28282B   gui=NONE
+autocmd InsertLeave * hi CursorLine     ctermfg=NONE     ctermbg=59       cterm=NONE        guifg=NONE        guibg=#232534   gui=NONE
+
 "}}}
-"===) KEYBINDINGS{{{
+" KEYBINDINGS{{{
 "--> plugins-config
 "====================================================================================>
 "==> use space as mapleader
@@ -453,6 +483,8 @@ nmap <leader>q :qall!<cr>
 "==> Escape insert mode
 imap jk <Esc>
 imap kj <Esc>
+imap jj <Esc>
+imap kk <Esc>
 "==> command mode with ; insted of :
 nnoremap ; :
 nnoremap df :
@@ -486,7 +518,22 @@ nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+"==> don't lose selection when shifting
+xnoremap > >gv
+xnoremap < <gv
 
+" crtl h/l to move left/right in insert mode
+imap <C-h> <left>
+imap <C-l> <right>
+
+"==> resize split
+nmap + :vertical resize +5<cr>
+nmap - :vertical resize -5<cr>
+nmap + :horizontal resize +2<cr>
+nmap - :horizontal resize -2<cr>
+
+"--> run norm commands in insert mode
+imap <C-i> <Esc>u@.
 
 "==> copy to system clipboard in wayland session
  xnoremap y y:call system("wl-copy", @")<cr>
@@ -508,7 +555,7 @@ map <leader>bh :bprevious<cr>
 "==> Quickly open a buffer for scribble
 map <leader>ob :e ~/buffer<cr>
 "==> close current buffer
-nmap <leader>b :bdelete<cr>
+nmap <leader>d :bdelete<cr>
 
 
 "==> Useful mappings for managing tabs
@@ -529,6 +576,9 @@ map <leader>te :tabedit <C-r>=escape(expand("%:p:h"), " ")<cr>/
 map <leader>e :e! ~/.vimrc<cr>
 autocmd! bufwritepost ~/.vimrc source ~/.vimrc
 
+" quickly take some note
+nmap <leader>n :e ~/.note.md<cr>
+
 
 "==> Spell checking; Pressing ,sc will toggle and untoggle spell checking
 map <leader>sc :setlocal spell!<cr>
@@ -548,8 +598,9 @@ cno $c e <C-\>eCurrentFileDir("e")<cr>
 " Map auto complete of (, ", ', [
 inoremap (( ()<esc>i
 inoremap [[ []<esc>i
-inoremap {{ {}<esc>i
-inoremap { {<esc>o}<esc>O
+" inoremap {{ {}<esc>i
+" inoremap { {<esc>o}<esc>O
+inoremap {{ {}<left><cr><up><c-o>o
 inoremap '' ''<esc>i
 inoremap "" ""<esc>i
 inoremap <C-i> "==>
@@ -579,7 +630,20 @@ endif
 endfunc
 "==> run/compile current file
 map <F5> :call CompileRun()<CR>
-map <leader>r :call CompileRun()<CR>
+
+
+
+"==> COMPILE FUNCTION FOR TERM
+func! CompileRunTerm()
+exec "w"
+if &filetype == 'python'
+exec "call term_sendkeys(2, 'python3 ' .expand('%:p') . '\<CR>')"
+elseif &filetype == 'javascript'
+exec "call term_sendkeys(2, 'deno run ' .expand('%:p') . '\<CR>')"
+endif
+endfunc
+"==> run/compile current file in split term
+map <leader>r :call CompileRunTerm()<CR>
 
 
 " => JavaScript section
@@ -593,6 +657,7 @@ au FileType javascript,typescript inoremap <buffer> $r return
 au FileType javascript,typescript inoremap <buffer> $f // --- PH<esc>FP2xi
 "==> javascript code format
 nmap <A-p> :%!js-beautify<cr>
+nmap <leader>p :%!js-beautify<cr>
 "==> autowrite for jvascript file
 au FileType javascript, autocmd TextChanged,TextChangedI <buffer> silent write
 
@@ -623,6 +688,8 @@ imap fj <C-O>o
 imap jf <C-O>o
 "==> color-picker
 nmap <C-p> :VCoolor<cr>
+"==>Startify home
+nmap <Home> :Startify<cr>
 
 "}}}
 
@@ -632,8 +699,25 @@ nmap <C-p> :VCoolor<cr>
 " LOADS PLUGINS
 set rtp+=~/.vim/plugins/*
 
-"  TESTING 
+
+" startify welcome msg
+let g:startify_custom_header = startify#pad(split(system(''), ''))
+" enable emmet only for html and css
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+
+" TESTING 
 highlight MyGroup ctermbg=green guibg=#1a1b26 guifg=#3a4b95
 let m = matchadd("MyGroup", '"==>')
-highlight TODOs ctermbg=green guibg=#565B70 guifg=grey gui=bold
+highlight TODOs ctermbg=green guibg=#565B70 guifg=grey cterm=bold
 let m = matchadd("TODOs", ' TESTING ')
+
+
+" highlight some keyword background
+au FileType javascript highlight JSkeyword ctermbg=black guibg=#2D2E3B  
+au FileType javascript let m = matchadd("JSkeyword", '\<const\>')
+au FileType javascript let m = matchadd("JSkeyword", '\<var\>')
+au FileType javascript let m = matchadd("JSkeyword", '\<let\>')
+" no follow-up comment in new line
+au FileType javascript set formatoptions-=cro
