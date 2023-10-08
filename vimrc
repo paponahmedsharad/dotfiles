@@ -536,8 +536,8 @@ nmap - :horizontal resize -2<cr>
 imap <C-i> <Esc>u@.
 
 "==> copy to system clipboard in wayland session
- xnoremap y y:call system("wl-copy", @")<cr>
- xnoremap <leader>y y:call system("wl-copy", @")<cr>
+xnoremap y y:call system("wl-copy", @")<cr>
+xnoremap <leader>y y:call system("wl-copy", @")<cr>
 " xnoremap <silent> <leader>y :w !wl-copy<CR><CR>
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
@@ -578,6 +578,7 @@ autocmd! bufwritepost ~/.vimrc source ~/.vimrc
 
 " quickly take some note
 nmap <leader>n :e ~/.note.md<cr>
+nmap <leader>nj :e ~/.note.js<cr>
 
 
 "==> Spell checking; Pressing ,sc will toggle and untoggle spell checking
@@ -598,6 +599,7 @@ cno $c e <C-\>eCurrentFileDir("e")<cr>
 " Map auto complete of (, ", ', [
 inoremap (( ()<esc>i
 inoremap [[ []<esc>i
+inoremap << <><esc>i
 " inoremap {{ {}<esc>i
 " inoremap { {<esc>o}<esc>O
 inoremap {{ {}<left><cr><up><c-o>o
@@ -611,7 +613,7 @@ func! CompileRun()
 exec "w"
 if &filetype == 'c'
 exec "!gcc % -o %<"
-exec "!time ./%<"
+exec "! ./%<"
 elseif &filetype == 'cpp'
 exec "!g++ % -o %<"
 exec "!time ./%<"
@@ -630,6 +632,8 @@ endif
 endfunc
 "==> run/compile current file
 map <F5> :call CompileRun()<CR>
+map <A-;> :call CompileRun()<CR>
+map <leader>r :call CompileRun()<CR>
 
 
 
@@ -643,7 +647,7 @@ exec "call term_sendkeys(2, 'deno run ' .expand('%:p') . '\<CR>')"
 endif
 endfunc
 "==> run/compile current file in split term
-map <leader>r :call CompileRunTerm()<CR>
+au FileType javascript,python map <leader>r :call CompileRunTerm()<CR>
 
 
 " => JavaScript section
@@ -699,7 +703,6 @@ nmap <Home> :Startify<cr>
 " LOADS PLUGINS
 set rtp+=~/.vim/plugins/*
 
-
 " startify welcome msg
 let g:startify_custom_header = startify#pad(split(system(''), ''))
 " enable emmet only for html and css
@@ -707,7 +710,7 @@ let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
 
-" TESTING 
+" DEV
 highlight MyGroup ctermbg=green guibg=#1a1b26 guifg=#3a4b95
 let m = matchadd("MyGroup", '"==>')
 highlight TODOs ctermbg=green guibg=#565B70 guifg=grey cterm=bold
@@ -715,9 +718,18 @@ let m = matchadd("TODOs", ' TESTING ')
 
 
 " highlight some keyword background
-au FileType javascript highlight JSkeyword ctermbg=black guibg=#2D2E3B  
+au FileType javascript highlight JSkeyword ctermbg=black guibg=#2D2E3B
 au FileType javascript let m = matchadd("JSkeyword", '\<const\>')
 au FileType javascript let m = matchadd("JSkeyword", '\<var\>')
 au FileType javascript let m = matchadd("JSkeyword", '\<let\>')
 " no follow-up comment in new line
 au FileType javascript set formatoptions-=cro
+
+cmap jk <Esc>
+cmap kj <Esc>
+cmap fj <cr>
+cmap jf <cr>
+
+
+" highlight Beacon guibg=white ctermbg=15
+
