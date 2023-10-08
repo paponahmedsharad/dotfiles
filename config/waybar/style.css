@@ -1,169 +1,220 @@
 * {
+
+  border: none;
+  border-radius: 0;
+  font-family: "Comic Mono,JetBrainsMono Nerd Font";
+  font-weight: 600;
+  font-size: 14px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(18, 18, 30, 0);
+  color: #CF6A7A;
+  opacity: 1;
+}
+
+tooltip {
+  background: #12121e;
   border-radius: 10px;
-  font-family: "JetbrainsMono Nerd Font";
-  font-size: 12px;
-  margin: 2px 4px 0px 4px;
-  padding: 1px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #11111b;
 }
 
-#waybar {
-  background: none;
-}
 
-window#waybar.hidden {
-  opacity: 0.7;
-}
-
-#window {
-  background: #2e3440;
-  /* color: #d8dee9; */
-}
-
-#temperature {
-  padding: 0px 20px;
-  color: #a3be00;
-  background: #2e3440;
-}
-
-#memory {
-  padding: 0px 20px;
-  color: #a3be00;
-  background: #2e3440;
-}
 #workspaces {
-  padding: 0px 20px;
-  background: linear-gradient(60deg, #1a1a66, #33331a);
+  background: #1e1e2e;
+  border-radius: 10px;
+  /* margin-left: 10px; */
+  margin-top: 10px;
+  padding-right: 0px;
+  /* padding-left: 5px; */
 }
 
 #workspaces button {
-  color: #e6e6a4;
-}
-
-#workspaces button:hover {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-#workspaces button.focused {
-  color: #e6e66a;
+  padding: 5px;
+  color: #404153;
+  /* margin-right: 5px; */
+  /* margin-left: 10px; */
 }
 
 #workspaces button.active {
-  color: #0dcf1a;
-  background: rgba(225, 225, 225, 0.1);
+  color: #AC8AD6;
+  background: #083b56;
+  /* padding:4px; */
+  /* margin: 10px; */
+  border-radius: 10px;
 }
 
-#workspaces button.urgent {
-  background-color: #eb4d4b;
-}
+/* #workspaces button.focused { */
+/*   color: #707880; */
+/*   background: #eba0ac; */
+/*   border-radius: 10px; */
+/*   margin-left: 10px; */
+/* } */
 
-#battery {
-  padding: 0px 20px;
-  color: #a3be8c;
-}
+/* #workspaces button.urgent { */
+/*   color: #11111b; */
+/*   background: #f28fad; */
+/*   border-radius: 10px; */
+/*   margin: 10px; */
+/* } */
 
-#battery.critical:not(.charging) {
-  background-color: #d8dee9;
-  color: #2e3440;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
+/* #workspaces button:hover { */
+/*   background: #11111b; */
+/*   color: #cdd6f4; */
+/*   border-radius: 10px; */
+/* } */
 
-#pulseaudio {
-  padding: 0px 20px;
-  color: #a3be8c;
-  background: #2e3440;
-}
+
+
 #custom-launcher {
-  padding: 0px 20px;
-  color: #a3be00;
-  background: #2e3440;
-}
-#battery {
-  transition: none;
   /* padding: 0px 20px; */
-  color: #a3be8c;
-  background: #2e3440;
+  /* color: #a3be00; */
+  color: #DEFF16;
+  /* background: #2e3440; */
+  background: #1e1e2e;
+  opacity: 0.8;
+  padding: 0px 10px;
+  margin: 10px 0px 0px 10px;
+  /* margin-top: 10px; */
+  /* border: 1px solid #181825; */
+  border-radius: 10px;
 }
-#battery.critical:not(.charging) {
-  background-color: #d8dee9;
-  color: #2e3440;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+
+/* #custom-power_profile, */
+/* #custom-weather, */
+#custom-launch_wofi,
+#cpu,
+#memory,
+#disk,
+#window,
+#clock,
+#battery,
+#pulseaudio,
+#custom-pacman,
+#network,
+#bluetooth,
+#temperature,
+/* #workspaces, */
+#tray,
+#custom-spotify,
+#backlight {
+  background: #1e1e2e;
+  opacity: 0.8;
+  padding: 0px 10px;
+  /* margin: 3px 0px; */
+  margin-top: 10px;
+  border: 1px solid #181825;
 }
-@keyframes blink {
-  to {
-    background-color: #bf616a;
-    color: #d8dee9;
-  }
+
+#cpu {
+  border-radius: 10px 0px 0px 10px;
+  color:#ffff44;
+}
+
+
+#disk {
+  border-radius: 0px 10px 10px 0px;
+  margin-right: 10px;
+  color:#EEA3A3;
 }
 
 #backlight {
-  padding: 0px 20px;
-  color: #88c0d0;
-  background: #2e3440;
+  border-radius: 10px 0px 0px 10px;
+  color:#A0B07C;
 }
 
-#network {
-  padding: 0px 20px;
-  color: #88c0d0;
-  background: #2e3440;
+#tray {
+  border-radius: 10px;
+  margin-right: 10px;
 }
-#custom-cpu {
-  padding: 0px 20px;
-  color: #88c0d0;
-  background: #2e3440;
+
+/* #workspaces { */
+/*   background: #1e1e2e; */
+/*   border-radius: 10px; */
+/*   margin-left: 10px; */
+/*   padding-right: 0px; */
+/*   padding-left: 5px; */
+/* } */
+
+/* #custom-power_profile { */
+/*   color: #a6e3a1; */
+/*   border-left: 0px; */
+/*   border-right: 0px; */
+/* } */
+
+#window {
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 200px;
 }
 
 #clock {
-  padding: 0px 60px;
-  color: #e6cccc;
-  background: linear-gradient(60deg, #1a1a66, #33331a);
-  font-family: "JetbrainsMono Nerd Font";
-  font-size: 16px;
-  opacity: 0.7;
-}
-#tray {
-  padding: 0px 20px;
-  color: #d8dee9;
-  background: #2e3440;
+  color: #fab387;
+  border-radius: 10px;
+  /* margin-left: 10px; */
+  margin-left: 10px;
+  border-right: 0px;
+  /* font-family: Roboto; */
+  font-family: "Roboto,JetBrainsMono Nerd Font";
 }
 
-#tags {
-  transition: none;
-  background: #e63440;
+#network {
+  color: #f9e2af;
+  border-radius: 10px;
+  margin-right: 10px;
+  border-left: 0px;
+  border-right: 0px;
+  font-family: "JetBrainsMono Nerd Font";
+  font-weight: 400;
+  font-size: 14px;
 }
 
-#tags button {
-  color: #4c566a;
-  background: transparent;
-  border-radius: 0px;
+#bluetooth {
+  color: #89b4fa;
+  border-radius: 10px;
+  margin-right: 10px;
 }
 
-#tags button.occupied {
-  transition: none;
-  color: #a3be8c;
-  background: transparent;
-  font-size: 0px;
+#pulseaudio {
+  color: #89b4fa;
+  border-left: 0px;
+  border-right: 0px;
 }
 
-#tags button.focused {
-  color: #81a1c1;
-  border-bottom: 0px solid #81a1c1;
+#pulseaudio.microphone {
+  color: #47b647;
+  border-left: 0px;
+  border-right: 0px;
+  border-radius: 0px 10px 10px 0px;
+  margin-right: 10px;
 }
 
-#tags button:hover {
-  transition: none;
-  box-shadow: inherit;
-  text-shadow: inherit;
-  color: #81a1c1;
+#battery {
+  color: #a6e3a1;
+  border-radius: 10px;
+  margin-right: 10px;
+  border-left: 0px;
 }
 
-#custom-powermenu {
-  /* background: #2e3440; */
+#custom-spotify {
+  border-radius: 10px;
+  margin-right: 10px;
+  border-right: 0px;
 }
+
+#custom-pacman {
+  color: #ff7a91;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+/**/
+/* #custom-weather { */
+/*   border-radius: 0px 10px 10px 0px; */
+/*   border-right: 0px; */
+/*   margin-left: 0px; */
+/* } */
+
