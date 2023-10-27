@@ -1,53 +1,202 @@
-## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
-
-## Configuration for Alacritty, the GPU enhanced terminal emulator.
-## It's a very basic and simple config file, for full configuration...
-## See, /usr/share/doc/alacritty/example/alacritty.yml
-
-## Import files (Colors, Fonts, Etc)
-import:
-  - ~/.config/alacritty/colors.yml
-  - ~/.config/alacritty/fonts.yml
-
-## Set environment variables
 env:
-  TERM: alacritty
-  WINIT_X11_SCALE_FACTOR: '1.0'
+  TERM: xterm-256color
+  WINIT_X11_SCALE_FACTOR: "1"
 
-## Terminal window settings
+
+# Font configuration
+font:
+
+  offset:
+      x: 0    # For letter spacing (default: 0).
+      y: 5    # For line spacing (default: 0).
+
+  # AppleFontSmoothing: true
+  # Normal (roman) font face
+  normal:
+    # Font family
+    # family: Victor Mono
+    # family: Iosevka Nerd Font Mono
+    family: Comic Mono
+    style: Light
+    # style: Regular
+
+  # Bold font face
+  bold:
+  #   # family: monospace
+  #   # family: Iosevka Nerd Font Mono
+    family: Comic Mono
+    style: Regular
+
+  # # Italic font face
+  # italic:
+  #   # family: monospace
+  #   # family: Iosevka Nerd Font Mono
+  #   family: Comic Mono
+  #   style: Italic
+
+  # # Bold italic font face
+  # bold_italic:
+  #   # family: monospace
+  #   # family: Iosevka Nerd Font Mono
+  #   family: Comic Mono
+  #   style: Bold Italic
+
+  # Point size
+  size: 13
+
+
+
+draw_bold_text_with_bright_colors: false
+
 window:
   dimensions:
-    columns: 82
-    lines: 24
+    columns: 100
+    lines: 30
 
-  padding:
-    x: 12
-    y: 12
+  # Spread additional padding evenly around the terminal content.
+  dynamic_padding: true
 
+  # Window decorations
   decorations: full
-  startup_mode: Windowed
-  dynamic_title: true
 
-## scrolling
+  # Window title
+  title: Alacritty@CachyOS
+
+  # Opacity
+  # opacity: 1.0
+
+  # Window class (Linux/BSD only):
+  class:
+    # Application instance name
+    instance: Alacritty
+    # General application class
+    general: Alacritty
+
+  # GTK theme variant (Linux/BSD only)
+  #
+  # Override the variant of the GTK theme. Commonly supported values are `Dark` and `Light`.
+  # Set this to `None` to use the default theme variant.
+  decorations_theme_variant: Dark
+
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
   history: 10000
+
+  # Scrolling distance multiplier.
   multiplier: 3
 
-## Background opacity
-  opacity: 1.0
+# Colors (Oceanic Next)
+#colors:
+#  # Default colors
+#  primary:
+#    background: '#1b2b34'
+#    foreground: '#d8dee9'
+#
+#  # Normal colors
+#  normal:
+#    black:   '#343d46'
+#    red:     '#EC5f67'
+#    green:   '#99C794'
+#    yellow:  '#FAC863'
+#    blue:    '#6699cc'
+#    magenta: '#c594c5'
+#    cyan:    '#5fb3b3'
+#    white:   '#d8dee9'
+#
+#  # Bright colors
+#  bright:
+#    black:   '#343d46'
+#    red:     '#EC5f67'
+#    green:   '#99C794'
+#    yellow:  '#FAC863'
+#    blue:    '#6699cc'
+#    magenta: '#c594c5'
+#    cyan:    '#5fb3b3'
+#    white:   '#d8dee9'
 
-## Cursor
+# Colors (Nord)
+colors:
+  # Default colors
+  primary:
+    # background: '0x2E3440'
+    background: '0x282C34'
+    # background: '0x1a1b26'
+    foreground: '0xD8DEE9'
+
+  # Normal colors
+  normal:
+    black:   '0x3B4252'
+    red:     '0xBF616A'
+    green:   '0xA3BE8C'
+    yellow:  '0xEBCB8B'
+    blue:    '0x81A1C1'
+    magenta: '0xB48EAD'
+    cyan:    '0x88C0D0'
+    white:   '0xE5E9F0'
+
+  # Bright colors
+  bright:
+    black:   '0x4C566A'
+    red:     '0xBF616A'
+    green:   '0xA3BE8C'
+    yellow:  '0xEBCB8B'
+    blue:    '0x81A1C1'
+    magenta: '0xB48EAD'
+    cyan:    '0x8FBCBB'
+    white:   '0xECEFF4'
+
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  save_to_clipboard: true
+  window.dynamic_title: true
+
 cursor:
-  style:
-    shape: Block
-    blinking: On
+  style: Underline
+  vi_mode_style: None
+  unfocused_hollow: true
+  thickness: 0.25
 
-  unfocused_hollow: false
-
-## Live config reload
 live_config_reload: true
 
-## Shell
-#shell:
-#  program: /bin/zsh
-#  args:
-#    - --login
+# working_directory: None
+working_directory: /home/sharad/code
+
+mouse:
+  # Click settings
+  #
+  # The `double_click` and `triple_click` settings control the time
+  # alacritty should wait for accepting multiple clicks as one double
+  # or triple click.
+  #double_click: { threshold: 300 }
+  #triple_click: { threshold: 300 }
+
+  # If this is `true`, the cursor is temporarily hidden when typing.
+  hide_when_typing: true
+
+hints:
+  launcher:
+    program: xdg-open
+
+  modifiers: None
+
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+key_bindings:
+  - { key: Paste,                                   action: Paste            }
+  - { key: Copy,                                    action: Copy             }
+  # - { key: L,        mods: Control,                 action: ClearLogNotice   }
+  # - { key: L,        mods: Control, mode: ~Vi,      chars: "\x0c"            }
+  - { key: PageUp,   mods: Shift,   mode: ~Alt,     action: ScrollPageUp,    }
+  - { key: PageDown, mods: Shift,   mode: ~Alt,     action: ScrollPageDown   }
+  - { key: Home,     mods: Shift,   mode: ~Alt,     action: ScrollToTop,     }
+  - { key: End,      mods: Shift,   mode: ~Alt,     action: ScrollToBottom   }
+  - { key: V,        mods: Control|Shift,           action: Paste            }
+  - { key: C,        mods: Control|Shift,           action: Copy             }
+  - { key: F,        mods: Control|Shift,           action: SearchForward    }
+  - { key: B,        mods: Control|Shift,           action: SearchBackward   }
+  - { key: C,        mods: Control|Shift, mode: Vi, action: ClearSelection   }
+  - { key: Key0,     mods: Control,                 action: ResetFontSize    }
+
