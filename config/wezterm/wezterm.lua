@@ -3,11 +3,16 @@ local wezterm = require("wezterm")
 return {
   window_decorations = "RESIZE",
   -- font = wezterm.font("AestheticIosevka Nerd Font Mono"),
-  font = wezterm.font_with_fallback { 'Victor Mono', 'Iosevka Nerd Font Mono' }, -- first font is the primary font and the rest are fallbacks
+  -- font = wezterm.font_with_fallback { 'Victor Mono', 'Iosevka Nerd Font Mono' }, -- first font is the primary font and the rest are fallbacks
+
+  -- font = wezterm.font_with_fallback { 'Iosevka Nerd Font Mono' }, -- first font is the primary font and the rest are fallbacks
+  -- line_height = 1.4,
+
+  font = wezterm.font_with_fallback { 'CodeNewRoman Nerd Font Mono' }, -- first font is the primary font and the rest are fallbacks
+  line_height = 1.2,
   font_rules = { { italic = true, font = wezterm.font_with_fallback { 'Victor Mono', 'Iosevka Nerd Font Mono' }, }, },
 	warn_about_missing_glyphs = true,
-  font_size = 11,
-  line_height = 1.4,
+  font_size = 14.3,
   default_cursor_style = "BlinkingBar", -- Block, Underline, Beam, SteadyBar, BlinkingBar, Hidden, BlinkingUnderline, SteadyUnderline, BlinkingBlock, SteadyBlock
   cursor_blink_rate = 500,
   cursor_thickness = 1.0,
@@ -158,7 +163,6 @@ return {
 	},
 -- }}}
 }
-
 
 
 

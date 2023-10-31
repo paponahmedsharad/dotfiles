@@ -1,13 +1,33 @@
 if status is-interactive
     set -g fish_greeting
-    fzf_configure_bindings --directory=\cf --variables=\e\cv # find directory
-    bind \cv 'fzf --preview "bat --color=always --style=numbers --line-range :500 {}" | xargs -r nvim' # add key bindings to find file with fzf and open it in vim
+       fzf_configure_bindings --directory=\cf --variables=\e\cv                                               # find directory
+       # bind \cv 'fzf --preview "bat --color=always --style=numbers --line-range :500 {}" | xargs -r nvim'     # add key bindings to find file with fzf and open it in vim
+       # bind \cv "fzf --layout=reverse --preview 'bat --color=always --style=numbers --line-range :500 {}' --color 'fg:#807dcc,fg+:#cce600,bg:#1a1b26,preview-bg:#1c2d39,border:#1b2c39' | xargs -r nvim"     # add key bindings to find file with fzf and open it in vim
+       bind \cv "fzf --prompt=' ➜  ' --pointer=' ' --layout=reverse --preview 'bat --color=always --style=numbers --line-range :500 {}' --color 'fg:#807dcc,fg+:#cce600,hl:#ffffff,hl+:#ffffff,bg:#1a1b26,bg+:#1a1b26,info:#525236,prompt:#ffffff,pointer:#ff0000,preview-bg:#1c2d3e,border:#1b2c3e' | xargs -r nvim"     # add key bindings to find file with fzf and open it in vim
+       bind \eg "fzf --padding=1 --prompt=' ➜  ' --pointer=' ' --height 30% --layout=reverse --preview 'bat --color=always --style=numbers --line-range :500 {}' --color 'fg:#807dcc,fg+:#cce600,hl:#ffffff,hl+:#ffffff,bg:#1d3847,bg+:#1d3847,info:#525236,prompt:#ffffff,pointer:#ff0000,preview-bg:#1c2d3e,border:#1b2c3e' --bind 'enter:become(nvim {})'"
+       bind \ev "fzf --padding=1 --prompt=' ➜  ' --pointer=' ' --height 30% --layout=reverse --preview 'bat --color=always --style=numbers --line-range :500 {}' --color 'fg:#807dcc,fg+:#cce600,hl:#ffffff,hl+:#ffffff,bg:#1d3847,bg+:#1d3847,info:#525236,prompt:#ffffff,pointer:#ff0000,preview-bg:#1c2d3e,border:#1b2c3e' --bind 'enter:become(vim {})'"
 end
+
+function fish_user_key_bindings
+      # bind \er "cd $(fd -t d .|fzf)"
+      bind \ed "cd (fd -t d .|fzf --padding=1 --prompt=' ➜  ' --pointer=' ' --height 40% --layout=reverse --color 'fg:#807dcc,fg+:#cce600,hl:#ffffff,hl+:#ffffff,bg:#1d3847,bg+:#1d3847,info:#525236,prompt:#ffffff,pointer:#ff0000,preview-bg:#1c2d3e,border:#1b2c3e')"
+      bind \eh "cd (fd -H -t d .|fzf --padding=1 --prompt=' ➜  ' --pointer=' ' --height 30% --layout=reverse --color 'fg:#807dcc,fg+:#cce600,hl:#ffffff,hl+:#ffffff,bg:#1d3847,bg+:#1d3847,info:#525236,prompt:#ffffff,pointer:#ff0000,preview-bg:#1c2d3e,border:#1b2c3e')"
+end
+
+# function cd_directory
+#   set selected_dir (fd -t d|fzf --height 30 --preview'echo (basename {})')
+
+#   if test -n "$selected_dir"
+#     cd $selected_dir
+#   end
+# end
+# bind \ed cd_directory
 
 
 # Source
-starship init fish | source # prompt
+starship init fish | source                                                                                # prompt
 [ -f "$HOME/.config/env.fish" ] && source "$HOME/.config/env.fish" #                                       env variables
+
 
 
 # Locale
@@ -16,28 +36,28 @@ export LC_ALL="en_US.UTF-8"
 
 
 # Exports
-export VISUAL="nvim" # editor
+export VISUAL="nvim"                                                                                       # editor
 export EDITOR="$VISUAL"
 
 
 # Completion
-bind --mode default \e\x20 forward-bigword execute # alt-space
-bind \ef forward-word # alt-f
-bind \e\; forward-bigword # alt-;
-bind \ej execute # alt-j
+bind --mode default \e\x20 forward-bigword execute                                                          # alt-space
+bind \ef forward-word                                                                                       # alt-f
+bind \e\; forward-bigword                                                                                   # alt-;
+bind \ej execute                                                                                            # alt-j
 # bind \cf forward-word                                                                                     # ctrl-f
 
 
 # Fetch
-set TERM_EMULATOR (ps -aux | grep (ps -p $fish_pid -o ppid=) | awk 'NR==1{print $11}') # get the terminal name
-if test "$TERM_EMULATOR" = /usr/bin/wezterm-gui # if wezterm run  "something"
-    # wezterm imgcat ~/.icons/flag1.png                                                                       # png/jpg/gif... insted of neofetch
-end
+# set TERM_EMULATOR (ps -aux | grep (ps -p $fish_pid -o ppid=) | awk 'NR==1{print $11}')                      # get the terminal name
+# if test "$TERM_EMULATOR" = "/usr/bin/wezterm-gui"                                                           # if wezterm run  "something"
+#     wezterm imgcat ~/.icons/flag1.png                                                                       # png/jpg/gif... insted of neofetch
+# end
 
 
 # Make su launch fish
 function su
-    command su --shell=/usr/bin/fish $argv
+   command su --shell=/usr/bin/fish $argv
 end
 
 
@@ -99,13 +119,18 @@ set -g fish_pager_color_description $comment
 
 # Abbreviations{{{
 # general
-abbr -a -g l lsd
-abbr -a -g ls 'exa --icons -G'
+abbr -a -g conf "sudo -e /etc/nixos/configuration.nix"
+abbr -a -g hmb "home-manager switch"
+abbr -a -g slc "./Sync-with-Local-Config.sh"
+abbr -a -g nixb "sudo nixos-rebuild switch"
+abbr -a -g hc "nvim /home/sharad/.config/home-manager/home.nix"
+abbr -a -g l 'lsd'
+abbr -a -g lss 'exa --icons -G'
 abbr -a -g la 'ls -a'
 abbr -a -g ll 'ls -l'
 abbr -a -g lal 'ls -al'
 abbr -a -g tree 'exa -T'
-abbr -a -g d dirs
+abbr -a -g d 'dirs'
 abbr -a -g h 'cd $HOME'
 abbr -a -g rr 'rm -vrf'
 abbr -a -g cp 'cp -vr'
@@ -114,15 +139,10 @@ abbr -a -g mkdir 'mkdir -p'
 abbr -a -g test 'Xephyr :5 & sleep 1 ; DISPLAY=:5 awesome'
 abbr -a -g svirt 'sudo systemctl start libvirtd.service'
 abbr -a -g line "find . -name '*.lua' | xargs wc -l"
-abbr -a -g ffamily "fc-list :spacing=mono: family"
 
 # vim/location
-abbr -a -g v nvim
-abbr -a -g vi vim
-abbr -a -g svim 'sudo -e'
+abbr -a -g v 'nvim'
 abbr -a -g vw "nvim -O index.html -c sp style.css"
-abbr -a -g reactp "cp -r ~/workspace/react/reactAppWithVite"
-abbr -a -g rserver "bun run dev"
 abbr -a -g fc "nvim $HOME/.config/fish/config.fish"
 abbr -a -g nc "cd ~/.config/nvim/ && nvim init.lua" #--> nvim config
 abbr -a -g wp "cd ~/workspace/practice/"
@@ -137,8 +157,6 @@ abbr -a -g ttt "nvim /tmp/app.ts"
 abbr -a -g hhh "nvim /tmp/index.html"
 abbr -a -g jjj "nvim /tmp/main.js"
 abbr -a -g www "cd ~/workspace"
-abbr -a -g wpp "cd ~/workspace/project/portfolio/"
-abbr -a -g book "nvim .javaScriptBook.md"
 
 # git
 abbr -a -g gac 'git add . && git commit -m'
@@ -166,38 +184,35 @@ abbr -a -g ys 'yay -Ss'
 # User abbreviations
 abbr -a -g grubup "sudo grub-mkconfig -o /boot/grub/grub.cfg"
 abbr -a -g chadwm 'startx ~/.config/chadwm/scripts/run.sh'
-abbr -a -g ytmp3 'youtube-dl --extract-audio --audio-format mp3' # Convert/Download YT videos as mp3
-abbr -a -g upd 'paru -Syu --noconfirm' # Update everything
-abbr -a -g ar 'echo "awesome.restart()" | awesome-client' # Reload AwesomeWM
-abbr -a -g kv 'kill -9 (pgrep vlc)' # Kill zombie vlc
-abbr -a -g priv 'fish --private' # Fish incognito mode
-abbr -a -g sshon 'sudo systemctl start sshd.service' # Start ssh service
-abbr -a -g sshoff 'sudo systemctl stop sshd.service' # Stop ssh service
-abbr -a -g untar 'tar -zxvf' # Untar
-abbr -a -g genpass 'openssl rand -base64 20' # Generate a random, 20-charactered password
-abbr -a -g sha 'shasum -a 256' # Test checksum
-abbr -a -g cn 'ping -c 5 8.8.8.8' # Ping google, checking network
-abbr -a -g ipe 'curl ifconfig.co' # Get external IP address
-abbr -a -g ips 'ip link show' # Get network interfaces information
-abbr -a -g wloff 'rfkill block wlan' # Block wlan, killing wifi connection
-abbr -a -g wlon 'rfkill unblock wlan' # Unblock wlan, start wifi connection
+abbr -a -g ytmp3 'youtube-dl --extract-audio --audio-format mp3'				# Convert/Download YT videos as mp3
+abbr -a -g upd 'paru -Syu --noconfirm'																								# Update everything
+abbr -a -g ar 'echo "awesome.restart()" | awesome-client'							# Reload AwesomeWM
+abbr -a -g kv 'kill -9 (pgrep vlc)'																			# Kill zombie vlc
+abbr -a -g priv 'fish --private'																				# Fish incognito mode
+abbr -a -g sshon 'sudo systemctl start sshd.service'										# Start ssh service
+abbr -a -g sshoff 'sudo systemctl stop sshd.service'										# Stop ssh service
+abbr -a -g untar 'tar -zxvf'																					# Untar
+abbr -a -g genpass 'openssl rand -base64 20'													# Generate a random, 20-charactered password
+abbr -a -g sha 'shasum -a 256'																			# Test checksum
+abbr -a -g cn 'ping -c 5 8.8.8.8'																			# Ping google, checking network
+abbr -a -g ipe 'curl ifconfig.co'																				# Get external IP address
+abbr -a -g ips 'ip link show'																					# Get network interfaces information
+abbr -a -g wloff 'rfkill block wlan'																			# Block wlan, killing wifi connection
+abbr -a -g wlon 'rfkill unblock wlan'																		# Unblock wlan, start wifi connection
 abbr -a -g grep "grep --color=auto"
 abbr -a -g egrep "egrep --color=auto"
 abbr -a -g fgrep "fgrep --color=auto"
-abbr -a -g cc1 'sudo sysctl vm.drop_caches=1'
 #}}}
 
 # Aliasrc{{{
 #-------------- others ----------------
-alias df="df -h" # readable output{{{
-alias free="free -mt" #free space of system}}}
+alias df="df -h" # readable output
+alias free="free -mt" #free space of system
 alias unlock="sudo rm /var/lib/pacman/db.lck" #pacman unlock
 alias rmpacmanlock="sudo rm /var/lib/pacman/db.lck"
 alias userlist="cut -d: -f1 /etc/passwd" #userlist
 alias merge="xrdb -merge ~/.Xresources" #merge new settings
 alias psa="ps auxf" #ps
-alias vjj="vim /tmp/practice.js -c 'Goyo 200'"
-alias pjs="vim ~/workspace/practice-js/practice.js -c term"
 # -------------- application --------------
 alias brp="~/.Burp/burp.sh"
 alias dvwa="docker run --rm -it -p 80:80 vulnerables/web-dvwa"
@@ -208,33 +223,33 @@ alias dvwa="docker run --rm -it -p 80:80 vulnerables/web-dvwa"
 #────────────────────────── TTY-1 ──────────────────────────
 if [ (tty) = /dev/tty1 ]
     # pgrep awesome; or startx "$XDG_CONFIG_HOME.xinitrc"
-    Hyprland
+   Hyprland
 end
 
 
 # setup NVIM_APPNAME variable
 # set -x NVIM_APPNAME "sharad"
-# set -x NVIM_APPNAME ecovim
-# set -x NVIM_APPNAME lazyvim
-# set -x NVIM_APPNAME NvChad
-# set -x NVIM_APPNAME oldnvim
+# set -x NVIM_APPNAME "newvim"
+abbr -a -g dvim 'set -x NVIM_APPNAME "newvim"'
+abbr -a -g chad 'set -x NVIM_APPNAME "nvchad"'
 
+# add ~/.config/emacs/bin to PATH
+# set -x PATH $PATH ~/.config/emacs/bin
 
 abbr -a -g cvim 'NVIM_APPNAME=NvChad nvim'
 abbr -a -g evim 'NVIM_APPNAME=ecovim nvim'
-abbr -a -g dvim 'NVIM_APPNAME=newvim nvim ~/.config/newvim/init.lua'
-abbr -a -g kvim 'NVIM_APPNAME=kickstart nvim ~/.config/kickstart/init.lua'
+abbr -a -g dvim 'NVIM_APPNAME=newvim nvim'
 
 # add ~/.config/emacs/bin to PATH
 set -x PATH $PATH ~/.config/emacs/bin
 
 # pnpm
-set -gx PNPM_HOME "/home/sharad/.local/share/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-    set -gx PATH "$PNPM_HOME" $PATH
-end
+# set -gx PNPM_HOME "/home/sharad/.local/share/pnpm"
+# if not string match -q -- $PNPM_HOME $PATH
+#     set -gx PATH "$PNPM_HOME" $PATH
+# end
 # pnpm end
 
 # bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
+# set --export BUN_INSTALL "$HOME/.bun"
+# set --export PATH $BUN_INSTALL/bin $PATH

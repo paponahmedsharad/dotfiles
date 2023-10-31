@@ -1,9 +1,8 @@
 * {
-
   border: none;
   border-radius: 0;
-  font-family: "Comic Mono,JetBrainsMono Nerd Font";
-  font-weight: 600;
+  font-family: JetBrainsMonoMedium Nerd Font,ComicShannsMono Nerd Font;
+  /* font-weight: 600; */
   font-size: 14px;
   min-height: 0;
 }
@@ -26,10 +25,8 @@ tooltip {
 #workspaces {
   background: #1e1e2e;
   border-radius: 10px;
-  /* margin-left: 10px; */
   margin-top: 10px;
   padding-right: 0px;
-  /* padding-left: 5px; */
 }
 
 #workspaces button {
@@ -69,22 +66,20 @@ tooltip {
 
 
 
+
 #custom-launcher {
-  /* padding: 0px 20px; */
-  /* color: #a3be00; */
   color: #DEFF16;
-  /* background: #2e3440; */
   background: #1e1e2e;
   opacity: 0.8;
   padding: 0px 10px;
   margin: 10px 0px 0px 10px;
-  /* margin-top: 10px; */
   /* border: 1px solid #181825; */
   border-radius: 10px;
 }
 
 /* #custom-power_profile, */
 /* #custom-weather, */
+#custom-notification,
 #custom-launch_wofi,
 #cpu,
 #memory,
@@ -107,6 +102,19 @@ tooltip {
   /* margin: 3px 0px; */
   margin-top: 10px;
   border: 1px solid #181825;
+}
+
+#custom-notification{
+  color: #deffcc;
+  font-family: "JetBrainsMonoMedium Nerd Font";
+  /* background: #2e3440; */
+  background: #1e1e2e;
+  opacity: 0.8;
+  /* padding: 0px 10px; */
+  padding-left: 10px;
+  padding-right: 13px;
+  margin: 10px 0px 0px 10px;
+  border-radius: 10px;
 }
 
 #cpu {
@@ -157,8 +165,8 @@ tooltip {
   /* margin-left: 10px; */
   margin-left: 10px;
   border-right: 0px;
-  /* font-family: Roboto; */
-  font-family: "Roboto,JetBrainsMono Nerd Font";
+  /* font-family: "NotoSansMono Nerd Font"; */
+  /* font-family: "JetBrainsMono Nerd Font"; */
 }
 
 #network {
@@ -167,8 +175,7 @@ tooltip {
   margin-right: 10px;
   border-left: 0px;
   border-right: 0px;
-  font-family: "JetBrainsMono Nerd Font";
-  font-weight: 400;
+  /* font-weight: 400; */
   font-size: 14px;
 }
 

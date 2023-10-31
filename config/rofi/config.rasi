@@ -3,8 +3,9 @@ configuration{
     lines: 5;
     font: "JetBrains mono Nerd Font 14";
     show-icons: true;
-    icon-theme: "Papirus";
+    /* icon-theme: "Papirus"; */
     /* icon-theme: "Tela circle"; */
+    icon-theme: "WhiteSur";
     terminal: "kitty";
     drun-display-format: "{name}";
     location: 0;
