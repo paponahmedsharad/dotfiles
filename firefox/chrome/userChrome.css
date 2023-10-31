@@ -1,144 +1,103 @@
-/* Hide tabs unless cursor is on top of toolbar */
+/* ================ IMPORTS ================ */
 
-:root:not([customizing]) #navigator-toolbox {
-  position: relative;
-  z-index: 1;
-}
+@import "userContent.css";
 
-#navigator-toolbox:not(:hover) > #titlebar {
-  -moz-window-dragging: no-drag !important;
-  pointer-events: none;
-}
+@import "css/responsiveNavbar.css";
+@import "css/popups.css";
+@import "css/overflowMenu.css";
+@import "css/findbar.css";
+@import "css/icons.css";
+@import "css/library.css";
+@import "css/urlbar.css";
+@import "css/tabbar.css";
+@import "css/tweaks.css";
 
-:root:not([customizing]) #navigator-toolbox:hover,
-:root:not([customizing]) #titlebar {
-  margin-bottom: calc(
-    0px - 2 * var(--tab-block-margin) - var(--tab-min-height)
-  );
-}
-#TabsToolbar:not([customizing]) {
-  visibility: hidden;
-  transition: visibility 0ms linear 200ms;
-}
 
-#navigator-toolbox,
-#titlebar {
-  transition: margin-bottom 48ms ease-out 200ms;
-}
+@media (-moz-os-version: windows-win10) {
 
-#navigator-toolbox:hover {
-  transition-delay: 0s;
-}
-#navigator-toolbox:hover > #titlebar {
-  margin-bottom: 0px;
-  transition-delay: 0s;
-}
+  :root[tabsintitlebar][sizemode="maximized"]:not([inDOMFullscreen]) > body > box {
+    margin-top: 8px !important;
+  }
 
-#navigator-toolbox:hover #TabsToolbar {
-  visibility: visible;
-  transition-delay: 18ms;
-}
-/* These rules make sure that height of tabs toolbar doesn't exceed tab-min-height */
-#tabbrowser-tabs:not([secondarytext-unsupported]) .tab-label-container {
-  max-height: var(--tab-min-height);
-}
-.tab-label {
-  line-height: 20px !important;
-}
-:root[uidensity="compact"] .tab-label {
-  line-height: 18px !important;
+  @media screen and (min-resolution: 1.25dppx) {
+    :root[tabsintitlebar][sizemode="maximized"]:not([inDOMFullscreen]) > body > box {
+      margin-top: 8px !important;
+    }
+  }
+
+  @media screen and (min-resolution: 1.5dppx) {
+    :root[tabsintitlebar][sizemode="maximized"]:not([inDOMFullscreen]) > body > box {
+      margin-top: 8px !important;
+    }
+  }
+
+  @media screen and (min-resolution: 2dppx) {
+    :root[tabsintitlebar][sizemode="maximized"]:not([inDOMFullscreen]) > body > box {
+      margin-top: 7px !important;
+    }
+  }
 }
 
-/* HIDES THE MAIN TOOLBAR AND SHOWS IT WHEN THE CURSOR IS OVER THE TABS TOOLBAR */
+:root[sizemode="fullscreen"] {
+  margin-top: 0px !important;
+}
 
 :root {
-  /* --uc-navbar-transform: -30px; */
-  --uc-navbar-transform: -10px;
+  --bookmark-block-padding: 1px !important;
+  /*--tab-min-height: 29px !important;*/
+  --menupopup-height: var(--tab-min-height);
+  --sidebar-menupopup-height: 36px;
+  --navbar-margin-top: calc(0px - var(--tab-min-height));
+  --navbar-percent: 32vw;
+  --subview-height: var(--tab-min-height);
+  --tab-radius: 8px;
+  --tab-border-width: 2px;
+  --toolbar-percent: 68vw;
+  --toolbarbutton-inner-padding: 6px !important;
+  --toolbarbutton-outer-padding: 3px !important;
+  /* 1px */
+  --urlbar-icon-padding: 3px !important;
+  --urlbar-min-height: calc(var(--tab-min-height) - 3px) !important;
+  --panel-background: rgba(0, 0, 0, 0) !important;
+  --panel-border-color: rgba(0, 0, 0, 0) !important;
+  --tabbar-gradient-color: url("../icons/animation.png");
+
+  /*
+  More gradients to try out
+  Usage:
+  --tabbar-gradient-color: linear-gradient();
+  --tabbar-gradient-color: url();
+
+  - url("../icons/animation.svg")
+
+  - linear-gradient(90deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);linear-gradient(90deg, #f79533 0%, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82, #f79533 50%, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82, #f79533 100%);
+  !Note
+  !Above linear gradient can be use with css/tabbar.css@177-198 to resemble the SVG animation
+
+  - linear-gradient(90deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82)
+  - linear-gradient(90deg, rgb(0,3,1),rgb(0, 140, 255),rgb(0,120,215),rgb(0,120,215),rgb(0,120,215),rgb(0,140,215), rgb(0,3,1));
+  - linear-gradient(90deg, #9059FF 0%, #FF4AA2 52.08%, #FFBD4F 100%);
+  */
 }
+
+/* Sidebar doesn't have any height variable for different densities */
 :root[uidensity="compact"] {
-  --uc-navbar-transform: -14px;
+  --sidebar-menupopup-height: 29px;
 }
 
-#navigator-toolbox > div {
-  display: contents;
-}
-:root[sessionrestored]
-  :where(
-    #nav-bar,
-    #PersonalToolbar,
-    #tab-notification-deck,
-    .global-notificationbox
-  ) {
-  transform: translateY(var(--uc-navbar-transform));
-}
-:root:is([customizing], [chromehidden*="toolbar"])
-  :where(
-    #nav-bar,
-    #PersonalToolbar,
-    #tab-notification-deck,
-    .global-notificationbox
-  ) {
-  transform: none !important;
-  opacity: 1 !important;
+:root[uidensity="touch"] {
+  --sidebar-menupopup-height: 41px;
 }
 
-#nav-bar:not([customizing]) {
-  opacity: 0;
-  transition: transform 400ms ease 1.8s, opacity 400ms ease 1.8s !important;
-  position: relative;
-  z-index: 2;
-}
-#TabsToolbar {
-  position: relative;
-  z-index: 3;
-}
+@import "css/myChanges.css";
 
-/* /* Show when toolbox is focused, like when urlbar has received focus */
-#navigator-toolbox:focus-within > .browser-toolbar {
-  transform: translateY(0);
-  opacity: 1;
-  transition-duration: 500ms, 200ms !important;
-  transition-delay: 0s !important;
-}
-/* Show when toolbox is hovered */
-#titlebar:hover ~ .browser-toolbar,
-#nav-bar:hover,
-#nav-bar:hover + #PersonalToolbar {
-  transform: translateY(0);
-  opacity: 1;
-  transition-duration: 500ms, 200ms !important;
-  transition-delay: 0s !important;
-}
-
-/* Bookmarks toolbar needs so extra rules */
-#PersonalToolbar {
-  transition: transform 400ms ease 1.8s !important;
-  position: relative;
-  z-index: 1;
-}
-
-/* Move up the content view */
-:root[sessionrestored]:not([inFullscreen]) > body > #browser {
-  margin-top: var(--uc-navbar-transform);
-}
-
-/* --------------------------------------------- */
-
+ /* custom  change*/
 .tabbrowser-tab:not([pinned="true"]) {
-  max-height: 8px !important;
+  font-size:12px !important;
 }
-
-#TabsToolbar {
-  max-height: 28px !important;
-  margin: 0px;
-  padding: 0px;
-  color: #b38000;
-  opacity: 0.8;
+#tabstoolbar {
+  font-size:14px !important;
 }
-
 #nav-bar {
-  max-height: 10px !important;
-  margin: 0px;
-  padding: 0px;
-  /* opacity: 0.9; */
+  font-size:14px !important;
 }
