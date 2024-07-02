@@ -1,5 +1,5 @@
 format = "$directory$character"
-right_format = """$git_branch$git_status"""
+# right_format = """$git_branch$git_status"""
 # right_format = """$git_branch$git_status$cmd_duration$directory"""
 
 add_newline = true
@@ -15,20 +15,20 @@ error_symbol = " [](#df5b61)"
 vicmd_symbol = "[  ](#78b892)"
 
 [directory]
-# format = "[](fg:#292e42 bg:none)[$path]($style)[](fg:#292e42 bg:#1a1b26)[](fg:#6791c9 bg:#232526)[](fg:#232526 bg:#6791c9)[](fg:#6791c9 bg:none)"
-format = "[](fg:#292e42 bg:#1a1b26)[  ](fg:#66e666 bg:#292e42)(fg:#292e42 bg:none)[$path ]($style)[](fg:#292e42 bg:#1a1b26)(fg:#6791c9 bg:none)"
-style = "fg:#aeaefa bg:#292e42"
+# format = "[](fg:#434c5e bg:none)[$path]($style)[](fg:#434c5e bg:#2e3440)[](fg:#6791c9 bg:#232526)[](fg:#232526 bg:#6791c9)[](fg:#6791c9 bg:none)"
+format = "[](fg:#434c5e bg:#2e3440)[  ](fg:#66e666 bg:#434c5e)(fg:#434c5e bg:none)[$path ]($style)[](fg:#434c5e bg:#2e3440)(fg:#6791c9 bg:none)"
+style = "fg:#aeaefa bg:#434c5e"
 truncation_length = 6
 truncate_to_repo=false
 
 
 [git_branch]#
-format = "[](fg:#292e42 bg:none)[$branch]($style)[](fg:#292e42 bg:#1a1b26)[](fg:#78b892 bg:#232526)[](fg:#282c34 bg:#78b892)[](fg:#78b892 bg:none) "
-style = "fg:#edeff0 bg:#292e42"
+format = "[](fg:#434c5e bg:none)[$branch]($style)[](fg:#434c5e bg:#2e3440)[](fg:#78b892 bg:#232526)[](fg:#282c34 bg:#78b892)[](fg:#78b892 bg:none) "
+style = "fg:#edeff0 bg:#434c5e"
 
 [git_status]
-format="[](fg:#292e42 bg:none)[$all_status$ahead_behind]($style)[](fg:#292e42 bg:#1a1b26)[](fg:#67afc1 bg:#232526)[](fg:#232526 bg:#67afc1)[](fg:#67afc1 bg:none) "
-style = "fg:#edeff0 bg:#292e42"
+format="[](fg:#434c5e bg:none)[$all_status$ahead_behind]($style)[](fg:#434c5e bg:#2e3440)[](fg:#67afc1 bg:#232526)[](fg:#232526 bg:#67afc1)[](fg:#67afc1 bg:none) "
+style = "fg:#edeff0 bg:#434c5e"
 conflicted = "="
 ahead =	"⇡${count}"
 behind = "⇣${count}"

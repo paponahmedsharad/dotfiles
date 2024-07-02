@@ -23,6 +23,11 @@ end
 # end
 # bind \ed cd_directory
 
+# takes a directory and cd enter newly created directory
+function mkcd
+   mkdir -p $argv[1]
+   cd $argv[1]
+end
 
 # Source
 starship init fish | source                                                                                # prompt
@@ -119,26 +124,32 @@ set -g fish_pager_color_description $comment
 
 # Abbreviations{{{
 # general
-abbr -a -g conf "sudo -e /etc/nixos/configuration.nix"
-abbr -a -g hmb "home-manager switch"
+abbr -a -g conf "nvim ~/repo/nixos-config/nixos/configuration.nix"
+abbr -a -g dot "cd ~/repo/nixos-config && lsd"
+abbr -a -g colo "~/.bin/colorpicker"
+abbr -a -g way "cd ~/.config/waybar && lsd"
+abbr -a -g hmb "home-manager switch --flake ."
+abbr -a -g hms "home-manager switch --flake ~/repo/nixos-config/#$USER"
 abbr -a -g slc "./Sync-with-Local-Config.sh"
 abbr -a -g nixb "sudo nixos-rebuild switch"
-abbr -a -g hc "nvim /home/sharad/.config/home-manager/home.nix"
+abbr -a -g hc "nvim /home/sharad/repo/nixos-config/home-manager/home.nix"
 abbr -a -g l 'lsd'
 abbr -a -g lss 'exa --icons -G'
 abbr -a -g la 'ls -a'
 abbr -a -g ll 'ls -l'
 abbr -a -g lal 'ls -al'
-abbr -a -g tree 'exa -T'
+abbr -a -g treee 'exa -T'
 abbr -a -g d 'dirs'
 abbr -a -g h 'cd $HOME'
-abbr -a -g rr 'rm -vrf'
-abbr -a -g cp 'cp -vr'
+abbr -a -g rr 'rm -rfv'
+abbr -a -g cp 'cp -rv'
 abbr -a -g se 'sudo -e'
 abbr -a -g mkdir 'mkdir -p'
 abbr -a -g test 'Xephyr :5 & sleep 1 ; DISPLAY=:5 awesome'
 abbr -a -g svirt 'sudo systemctl start libvirtd.service'
 abbr -a -g line "find . -name '*.lua' | xargs wc -l"
+
+abbr -a -g cc1 'sudo sysctl vm.drop_caches=1'
 
 # vim/location
 abbr -a -g v 'nvim'
@@ -166,18 +177,24 @@ abbr -a -g push 'git push'
 abbr -a -g gc 'git clone --depth=1'
 abbr -a -g gu 'git clone --depth=1 https://github.com/'
 
+# nix
+abbr -a -g ii 'nix-env -iA nixos.'
+abbr -a -g ss 'nix-search'
+# abbr -a -g nixp "nix-shell -p";
+
+
 # pacman
 abbr -a -g pas 'pacman -Slq | fzf | xargs -r sudo pacman -S'
 abbr -a -g pacs "pacman -Slq | fzf -m --preview 'cat <(pacman -Si {1}) <(pacman -Fl {1} | awk \"{print \$2}\")' | xargs -ro sudo pacman -S"
 abbr -a -g pacr "pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
-abbr -a -g ii 'sudo pacman -S'
-abbr -a -g ss 'sudo pacman -Ss'
+# abbr -a -g ii 'sudo pacman -S'
+# abbr -a -g ss 'sudo pacman -Ss'
 abbr -a -g update 'yes | sudo pacman -Syyu'
 abbr -a -g prm 'sudo pacman -Rns'
 abbr -a -g pars "paru -Slq | fzf -m --preview 'cat <(paru -Si {1}) <(paru -Fl {1} | awk \"{print \$2}\")' | xargs -ro  paru -S"
 abbr -a -g p "pacman -Q | fzf"
 abbr -a -g pi 'paru -S'
-abbr -a -g ps 'paru -Ss'
+# abbr -a -g ps 'paru -Ss'
 abbr -a -g yi 'yay -S'
 abbr -a -g ys 'yay -Ss'
 
@@ -224,6 +241,7 @@ alias dvwa="docker run --rm -it -p 80:80 vulnerables/web-dvwa"
 if [ (tty) = /dev/tty1 ]
     # pgrep awesome; or startx "$XDG_CONFIG_HOME.xinitrc"
    Hyprland
+   # awesome
 end
 
 
@@ -253,3 +271,27 @@ set -x PATH $PATH ~/.config/emacs/bin
 # bun
 # set --export BUN_INSTALL "$HOME/.bun"
 # set --export PATH $BUN_INSTALL/bin $PATH
+# set --export PATH $go/bin $PATH
+
+# programs install path
+set -x GOBIN $HOME/.go/bin
+# Set the workspace path
+set -x GOPATH $HOME/.go
+# Add the go bin path to be able to execute our programs
+set -x PATH $PATH /usr/local/go/bin $GOPATH/bin
+
+
+
+
+# =============================================================================
+#
+# To initialize zoxide, add this to your configuration (usually
+# ~/.config/fish/config.fish):
+#
+zoxide init fish | source
+alias j="zi"
+
+export NNN_PLUG='f:finder;o:fzopen;p:mocq;d:diffs;t:preview-tui;v:imgview;p:preview-tabbed'
+set --export NNN_FIFO "/tmp/nnn.fifo"
+
+

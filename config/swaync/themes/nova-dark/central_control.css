@@ -1,0 +1,298 @@
+/* @define-color text            @foreground; */
+@define-color text            #b3b344;
+/* @define-color background-alt  alpha(@color1, .4); */
+@define-color background-alt  alpha(#1a5261, .8);
+/* @define-color selected        @color6; */
+@define-color selected        #ffffff;
+/* @define-color hover           alpha(@selected, .4); */
+@define-color hover           alpha(#ffffff, .4);
+/* @define-color urgent          @color2; */
+@define-color urgent          #ff0000;
+
+* {
+  color:            @text;
+  all: unset;
+  /* font-size: 14px; */
+  /* font-family: "JetBrains Mono Nerd Font 10"; */
+  font-family: "Libre Baskerville", sans-serif;
+  /* font-family: "CodeNewRoman Nerd Font", sans-serif; */
+    /* font-weight: bold; */
+  font-size: 14px;
+  transition: 200ms;
+}
+
+/* Avoid 'annoying' backgroud */
+.blank-window {
+  background: transparent;
+}
+
+/* ╭────────────────────────────────────────────────────────────────────╮
+   │                           CONTROL CENTER                           │
+   ╰────────────────────────────────────────────────────────────────────╯
+*/
+.control-center {
+  /* background: alpha(@background, .55); */
+  background: alpha(#38384d, .95);
+  border-radius: 12px;
+  /* border: 1px solid @selected; */
+  border: 1px solid #2a4b46;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,.6);
+  margin: 18px;
+  padding: 12px;
+}
+
+/* ╭────────────────────────────────────────────────────────────────────╮
+   │                           Notifications                            │
+   ╰────────────────────────────────────────────────────────────────────╯
+*/
+.control-center .notification-row .notification-background,
+.control-center .notification-row .notification-background .notification.critical {
+  background-color: @background-alt;
+  border-radius: 16px;
+  margin: 4px 0px;
+  padding: 4px;
+}
+
+.control-center .notification-row .notification-background .notification.critical {
+  color: @urgent;
+}
+
+.control-center .notification-row .notification-background .notification .notification-content {
+  margin: 6px;
+  padding: 8px 6px 2px 2px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * {
+  min-height: 3.4em;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action {
+  background: alpha(@selected, .6);
+  color: @text;
+  border-radius: 12px;
+  margin: 6px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
+  background: @selected;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
+  background-color: @selected;
+}
+
+/* Buttons */
+
+.control-center .notification-row .notification-background .close-button {
+  background: transparent;
+  border-radius: 6px;
+  color: @text;
+  margin: 0px;
+  padding: 4px;
+}
+
+.control-center .notification-row .notification-background .close-button:hover {
+  /* background-color: @selected; */
+  background: #ff0000;
+  color:#ffffff;
+}
+
+.control-center .notification-row .notification-background .close-button:active {
+  background-color: @selected;
+  /* background: #660000; */
+}
+
+progressbar,
+progress,
+trough {
+  border-radius: 12px;
+}
+
+progressbar {
+  background-color: rgba(255,255,255,.1);
+}
+
+
+/* ╭────────────────────────────────────────────────────────────────────╮
+   │                    Notifications expanded-group                    │
+   ╰────────────────────────────────────────────────────────────────────╯
+*/
+.notification-group {
+  margin: 20px 8px 8px 8px;
+
+}
+.notification-group-headers {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: @text;
+  /* color: #808080; */
+  /* color: red; */
+  margin-bottom: 10px;
+  margin-left: 8px;
+  /* letter-spacing: 2px; */
+
+}
+
+.notification-group-icon {
+  /* color: @text; */
+  /* color: red; */
+  /* color: #808080; */
+}
+
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+  background: transparent;
+  color: @text;
+  margin: 4px;
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.notification-group-collapse-button:hover,
+.notification-group-close-all-button:hover {
+  background: @hover;
+}
+
+/* ╭────────────────────────────────────────────────────────────────────╮
+   │                              WIDGETS                               │
+   ╰────────────────────────────────────────────────────────────────────╯
+*/
+/* Notification clear button */
+.widget-title {
+  font-size: 1.2em;
+  margin: 8px;
+  padding: 8px;
+  background: #334d4d;
+  border-radius: 8px;
+  color: #cccc00;
+}
+
+.widget-title button {
+  /* background: @background-alt; */
+  background: #e63366;
+  color: #000;
+  border-radius: 6px;
+  padding: 4px 16px;
+}
+
+.widget-title button:hover {
+  background-color: @hover;
+}
+
+.widget-title button:active {
+  background-color: @selected;
+}
+
+  /* Do not disturb */
+.widget-dnd {
+  background: #334d4d;
+  border-radius: 8px;
+  padding: 8px;
+
+  margin: 8px;
+  font-size: 1.2rem;
+  color: #b3b3b3;
+}
+
+.widget-dnd > switch {
+  background: @background-alt;
+  font-size: initial;
+  border-radius: 8px;
+  box-shadow: none;
+  padding: 2px;
+  background: #c34d31;
+  background: #1a2833;
+}
+
+.widget-dnd > switch:hover {
+  background: @hover;
+}
+
+.widget-dnd > switch:checked {
+  background: @selected;
+}
+
+.widget-dnd > switch:checked:hover {
+  background: @hover;
+}
+
+.widget-dnd > switch slider {
+  background: @text;
+  border-radius: 6px;
+}
+
+  /* Buttons menu */
+.widget-buttons-grid {
+  font-size: x-large;
+  padding: 6px 2px;
+  margin: 6px;
+  border-radius: 12px;
+  /* background: @background-alt; */
+  background: #33be80;
+    color:#000;
+  border-radius: 8px;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button {
+  margin: 4px 10px;
+  padding: 6px 12px;
+  background: transparent;
+  border-radius: 8px;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button:hover {
+  background: @hover;
+}
+
+
+  /* Music player */
+.widget-mpris {
+    background: @background-alt;
+    border-radius: 16px;
+    color: @text;
+    margin:  20px 6px;
+}
+
+  /* NOTE: Background need *opacity 1* otherwise will turn into the album art blurred  */
+.widget-mpris-player {
+    background-color: @background-sec;
+    border-radius: 22px;
+    padding: 6px 14px;
+    margin: 6px;
+}
+
+.widget-mpris > box > button {
+  color: @text;
+  border-radius: 20px;
+}
+
+.widget-mpris button {
+  color: alpha(@text, .6);
+}
+
+.widget-mpris button:hover {
+  color: @text;
+}
+
+.widget-mpris-album-art {
+  border-radius: 16px;
+}
+
+.widget-mpris-title {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.widget-mpris-subtitle {
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+/* Volume */
+.widget-volume {
+  background: @background-sec;
+  color: @background;
+  padding: 4px;
+  margin: 6px;
+  border-radius: 6px;
+}

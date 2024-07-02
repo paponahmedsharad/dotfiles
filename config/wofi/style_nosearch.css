@@ -2,21 +2,17 @@
 @define-color base2 #40455;
 @define-color font1 #f222ff;
 @define-color font2 #ffd318;
-/* @define-color border #9963ff; */
+@define-color border #9963ff;
 @define-color shadow #fc199a;
-@define-color background #363a4f;
-@define-color base2 #363a4f;
-@define-color inputBorder #668099;
+@define-color background #161925;
 
 * {
 	border: none;
 	border-radius: 0;
-	/* font-family: Victor Mono SemiBold; */
-	font-family: Comic Mono;
-  /* font-family: "Libre Baskerville", sans-serif; */
+	font-family: Victor Mono SemiBold;
 	font-size: 18px;
 	min-height: 24px;
-	/* font-weight: bold; */
+	font-weight: bold;
 }
 
 window {
@@ -25,21 +21,20 @@ window {
 	padding-left: 16px;
 	padding-right: 16px;
 	margin-bottom: 0px;
-	border-radius: 16px;
-	/* transition: none; */
+	border-radius: 26px;
+	transition: none;
 	background: @background;
-	/* border: 2px solid red; */
+	border: 2px solid @border;
 }
 
 #input {
+	margin-top: -50px;
 	margin-bottom: 16px;
-  margin-top: 8px;
 	padding: 3px 8px 3px 8px;
 	border-radius: 8px;
-	border: 2px solid @inputBorder;
+	border: 1px solid @border;
 	color: @font1;
 	background-color: @base1;
-  /* box-shadow: 0 4px 12px 0 rgba(11, 18, 15, 0.97); */
 }
 
 #inner-box {
@@ -47,11 +42,9 @@ window {
 }
 
 #outer-box {
+	margin: 6px;
 	padding: 16px;
 	background-color: @base2;
-	border: 2px solid #668099;
-  border-radius:16px;
-  box-shadow: 0 4px 6px 0 rgba(11, 18, 15, 0.57);
 }
 
 #text {
@@ -71,10 +64,9 @@ window {
 
 #entry:selected {
 	background-color: @base1;
-	border-radius: 16px;
+	border-radius: 8px;
 	border: 1px solid @border;
 	text-shadow: 0 0 5px @shadow;
-  box-shadow: 0 4px 6px 0 rgba(11, 18, 15, 0.27);
 }
 
 #text:selected {
