@@ -52,6 +52,7 @@ bind \e\; forward-bigword                                                       
 bind \ej execute                                                                                            # alt-j
 # bind \cf forward-word                                                                                     # ctrl-f
 
+bind \em yazi                                                                                               # yazi file manager
 
 # Fetch
 # set TERM_EMULATOR (ps -aux | grep (ps -p $fish_pid -o ppid=) | awk 'NR==1{print $11}')                      # get the terminal name
@@ -141,7 +142,8 @@ abbr -a -g lal 'ls -al'
 abbr -a -g treee 'exa -T'
 abbr -a -g d 'dirs'
 abbr -a -g h 'cd $HOME'
-abbr -a -g rr 'rm -rfv'
+# abbr -a -g rr 'rm -rfv'
+abbr -a -g rr 'trash -v'
 abbr -a -g cp 'cp -rv'
 abbr -a -g se 'sudo -e'
 abbr -a -g mkdir 'mkdir -p'
@@ -179,6 +181,7 @@ abbr -a -g gu 'git clone --depth=1 https://github.com/'
 
 # nix
 abbr -a -g ii 'nix-env -iA nixos.'
+abbr -a -g iiu 'nix-env -iA nixos-unstable.'
 abbr -a -g ss 'nix-search'
 # abbr -a -g nixp "nix-shell -p";
 
@@ -255,8 +258,10 @@ abbr -a -g chad 'set -x NVIM_APPNAME "nvchad"'
 # set -x PATH $PATH ~/.config/emacs/bin
 
 abbr -a -g cvim 'NVIM_APPNAME=NvChad nvim'
-abbr -a -g evim 'NVIM_APPNAME=ecovim nvim'
+abbr -a -g evim 'NVIM_APPNAME=evim nvim'
 abbr -a -g dvim 'NVIM_APPNAME=newvim nvim'
+abbr -a -g tvim 'NVIM_APPNAME=testvim nvim'
+abbr -a -g lvim 'NVIM_APPNAME=lazyvim nvim'
 
 # add ~/.config/emacs/bin to PATH
 set -x PATH $PATH ~/.config/emacs/bin

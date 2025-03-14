@@ -146,7 +146,7 @@
    │                          central control                           │
    ╰────────────────────────────────────────────────────────────────────╯
 */
-@define-color text            #b3b344;
+@define-color text            #000000;
 
 * {
   color: @text;
